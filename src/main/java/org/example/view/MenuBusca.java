@@ -17,7 +17,8 @@ public class MenuBusca {
             System.out.println("0 - Aluno");
             System.out.println("1 - Professor");
             System.out.println("2 - Turma");
-            System.out.println("3 - Sair");
+            System.out.println("3 - Responsável");
+            System.out.println("4 - Sair");
 
             try {
                 acao = sc.nextInt();
@@ -52,9 +53,11 @@ public class MenuBusca {
                         break;
 
                     case 3:
-                        System.out.println("Saindo...");
+                            MenuBuscaResponsavel menuBuscaResponsavel = new MenuBuscaResponsavel();
+                            menuBuscaResponsavel.ExibirMenuResponsavel(escola);
                         break;
-
+                    case 4:
+                        System.out.println("Saindo...");
                     default:
                         System.out.println("Opção Inválida.");
                         break;
@@ -68,6 +71,6 @@ public class MenuBusca {
                 sc.nextLine();
             }
 
-        } while (acao != 3);
+        } while (acao != 4);
     }
 }

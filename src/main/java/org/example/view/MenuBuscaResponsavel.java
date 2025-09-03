@@ -1,20 +1,19 @@
 package org.example.view;
 
-import org.example.controller.AtualizarProfessor;
+import org.example.controller.AtualizarResponsavel;
 import org.example.controller.Cadastro;
-import org.example.controller.RemoverProfessor;
+import org.example.controller.RemoverResponsavel;
 import org.example.model.Escola;
-import org.example.model.Professor;
+import org.example.model.Responsavel;
 
 import java.util.InputMismatchException;
-import java.util.List;
 import java.util.Scanner;
 
-public class MenuBuscaProfessor {
+public class MenuBuscaResponsavel {
     Scanner sc = new Scanner(System.in);
     Cadastro cadastro = new Cadastro();
 
-    public void ExibirMenuProfessor(Escola escola) {
+    public void ExibirMenuResponsavel(Escola escola) {
         try {
             System.out.println("0 - Ler");
             System.out.println("1 - Atualizar");
@@ -22,35 +21,32 @@ public class MenuBuscaProfessor {
             System.out.println("3 - Sair");
 
             int acao = sc.nextInt();
-            sc.nextLine();
+            sc.nextLine(); // limpar buffer
 
-            System.out.println("Digite o nome do professor: ");
+            System.out.println("Digite o nome do responsável: ");
             String nome = sc.nextLine().trim();
 
-            Professor buscado = buscarProfessorPorNome(escola, nome);
+            Responsavel buscado = buscarResponsavelPorNome(escola, nome);
 
             if (buscado == null) {
-                System.out.println("❌ Não há professor com esse nome.");
+                System.out.println("❌ Não há responsável com esse nome.");
             } else {
                 switch (acao) {
                     case 0:
+                        // Ler informações
                         System.out.println("Nome: " + buscado.getNome());
                         System.out.println("Data de Nascimento: " + buscado.getDataNascimento());
+                        System.out.println("Telefone: " + buscado.getTelefone());
                         System.out.println("Endereço: " + buscado.getEndereco().bairro + " - " + buscado.getEndereco().cidade);
-                        System.out.println("Formação: " + buscado.getFormacao());
-                        if (buscado.getTurma() != null) {
-                            System.out.println("Turma: " + buscado.getTurma().getSerie() + " - " + buscado.getTurma().getAnoLetivo());
-                        } else {
-                            System.out.println("Turma: Sem turma atribuída.");
-                        }
                         break;
                     case 1:
-                        AtualizarProfessor atualizarProfessor = new AtualizarProfessor();
-                        atualizarProfessor.AtualizarProfessor(escola, buscado);
+                        AtualizarResponsavel atualizarResponsavel = new AtualizarResponsavel();
+                        atualizarResponsavel.AtualizarResponsavel(escola, buscado);
                         break;
                     case 2:
-                        RemoverProfessor removerProfessor = new RemoverProfessor();
-                        removerProfessor.RemoverProfessor(escola, buscado);
+                        RemoverResponsavel removerResponsavel = new RemoverResponsavel();
+                        removerResponsavel.RemoverResponsavel(escola, buscado);
+                        System.out.println("✅ Responsável removido e desvinculado dos alunos.");
                         break;
                     case 3:
                         System.out.println("Saindo...");
@@ -63,18 +59,17 @@ public class MenuBuscaProfessor {
 
         } catch (InputMismatchException e) {
             System.out.println("❌ Entrada inválida. Digite apenas números para a opção.");
-            sc.nextLine();
+            sc.nextLine(); // limpar buffer
         } catch (Exception e) {
             System.out.println("❌ Ocorreu um erro inesperado: " + e.getMessage());
         }
     }
 
-    private Professor buscarProfessorPorNome(Escola escola, String nome) {
-        for (Professor p : escola.getProfessores()) {
-            if (p.getNome().equalsIgnoreCase(nome)) return p;
-        }
-        for (Professor p : escola.getProfessoresSemTurma()) {
-            if (p.getNome().equalsIgnoreCase(nome)) return p;
+    private Responsavel buscarResponsavelPorNome(Escola escola, String nome) {
+        if (escola.getResponsaveis() != null) {
+            for (Responsavel r : escola.getResponsaveis()) {
+                if (r.getNome().equalsIgnoreCase(nome)) return r;
+            }
         }
         return null;
     }

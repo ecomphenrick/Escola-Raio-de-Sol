@@ -2,6 +2,7 @@ package org.example.view;
 
 import org.example.controller.AtualizarAluno;
 import org.example.controller.Cadastro;
+import org.example.controller.RemoverAluno;
 import org.example.model.Aluno;
 import org.example.model.Escola;
 
@@ -37,7 +38,11 @@ public class MenuBuscaAluno {
                         System.out.println("Data de Nascimento: " + buscado.getDataNascimento());
                         System.out.println("Endereço: " + buscado.getEndereco().bairro + " - " + buscado.getEndereco().estado );
                         System.out.println("Naturalidade: " + buscado.getNaturalidade());
-                        System.out.println("Responsável: " + buscado.getResponsavel().getNome());
+                        if(buscado.getResponsavel()!=null){
+                            System.out.println("Responsável: " + buscado.getResponsavel().getNome());
+                        }else{
+                            System.out.println("Sem responsável cadastrado.");
+                        }
                         if (buscado.getTurma() != null) {
                             System.out.println("Turma: " + buscado.getTurma().getSerie() + " - " + buscado.getTurma().getAnoLetivo());
                         } else {
@@ -49,7 +54,8 @@ public class MenuBuscaAluno {
                         atualizarAluno.AtualizarAluno(escola, buscado);
                         break;
                     case 2:
-                        cadastro.RemoverAluno(escola, buscado);
+                        RemoverAluno removerAluno =new RemoverAluno();
+                        removerAluno.RemoverAluno(escola, buscado);
                         break;
                     case 3:
                         System.out.println("Saindo...");

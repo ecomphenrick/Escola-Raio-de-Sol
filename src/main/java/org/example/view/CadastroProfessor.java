@@ -1,6 +1,7 @@
 package org.example.view;
 
 import org.example.controller.Cadastro;
+import org.example.controller.ControleCadastroProfessor;
 import org.example.model.*;
 
 import java.util.ArrayList;
@@ -11,6 +12,7 @@ import java.util.Scanner;
 public class CadastroProfessor {
 
     public void CadastroProfessor(Escola escola) {
+        ControleCadastroProfessor controleCadastroProfessor = new ControleCadastroProfessor();
         Scanner sc = new Scanner(System.in);
         Cadastro cadastro = new Cadastro();
         List<Turma> turmas = escola.getTurmas();
@@ -23,18 +25,8 @@ public class CadastroProfessor {
             System.out.print("Data de Nascimento: ");
             String dataNascimento = sc.nextLine();
 
-            System.out.println("Cadastrando Endereço: ");
-            System.out.print("Rua: ");
-            String rua = sc.nextLine();
-            System.out.print("Bairro: ");
-            String bairro = sc.nextLine();
-            System.out.print("CEP: ");
-            String cep = sc.nextLine();
-            System.out.print("Cidade: ");
-            String cidade = sc.nextLine();
-            System.out.print("Estado: ");
-            String estado = sc.nextLine();
-            Endereco endereco = new Endereco(rua, bairro, cep, cidade, estado);
+            CadastroEndereco cadastroEndereco = new CadastroEndereco();
+            Endereco endereco = cadastroEndereco.CadastroEndereco();
 
             System.out.print("Formação: ");
             String formacao = sc.nextLine();
@@ -46,7 +38,7 @@ public class CadastroProfessor {
             Professor novoProfessor;
 
             if (turmas == null || turmas.isEmpty()) {
-                novoProfessor = cadastro.CadastroProfessor(escola, nome, dataNascimento, endereco,
+                novoProfessor = controleCadastroProfessor.CadastroProfessor(escola, nome, dataNascimento, endereco,
                         formacao, null, telefone, dependentes);
             } else {
                 System.out.println("Qual Turma? ");
@@ -61,7 +53,7 @@ public class CadastroProfessor {
 
                 if (escolha < 0 || escolha >= turmas.size()) {
                     System.out.println("❌ Escolha de turma inválida. Professor será cadastrado sem turma.");
-                    novoProfessor = cadastro.CadastroProfessor(escola, nome, dataNascimento, endereco,
+                    novoProfessor = controleCadastroProfessor.CadastroProfessor(escola, nome, dataNascimento, endereco,
                             formacao, null, telefone, dependentes);
                 } else {
                     Turma turma = turmas.get(escolha);
@@ -69,10 +61,10 @@ public class CadastroProfessor {
                     if (turma.getProfessor() != null) {
                         System.out.println("❌ Esta turma já possui professor: " + turma.getProfessor().getNome());
                         System.out.println("Professor cadastrado sem turma.");
-                        novoProfessor = cadastro.CadastroProfessor(escola, nome, dataNascimento, endereco,
+                        novoProfessor = controleCadastroProfessor.CadastroProfessor(escola, nome, dataNascimento, endereco,
                                 formacao, null, telefone, dependentes);
                     } else {
-                        novoProfessor = cadastro.CadastroProfessor(escola, nome, dataNascimento, endereco,
+                        novoProfessor = controleCadastroProfessor.CadastroProfessor(escola, nome, dataNascimento, endereco,
                                 formacao, turma, telefone, dependentes);
                         turma.setProfessor(novoProfessor);
                         System.out.println("✅ Professor vinculado à turma.");

@@ -1,6 +1,7 @@
 package org.example.view;
 
 import org.example.controller.Cadastro;
+import org.example.controller.ControleCadastroTurma;
 import org.example.model.Aluno;
 import org.example.model.Escola;
 import org.example.model.Professor;
@@ -57,7 +58,8 @@ public class CadastroTurma {
             }
 
             List<Aluno> alunos = new ArrayList<>();
-            Turma novaTurma = cadastro.CadastroTurma(escola, serie, anoLetivo, professorTurma, alunos);
+            ControleCadastroTurma cadastroTurma = new ControleCadastroTurma();
+            Turma novaTurma = cadastroTurma.CadastroTurma(escola, serie, anoLetivo, professorTurma, alunos);
 
             if (professorTurma != null) {
                 professorTurma.setTurma(novaTurma);

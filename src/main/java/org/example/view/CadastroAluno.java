@@ -1,6 +1,7 @@
 package org.example.view;
 
 import org.example.controller.Cadastro;
+import org.example.controller.ControleCadastroAluno;
 import org.example.model.*;
 
 import java.util.ArrayList;
@@ -17,26 +18,16 @@ public class CadastroAluno {
 
         try {
             System.out.println("Cadastrando Aluno.");
-            System.out.println("Digite o nome do aluno: ");
+            System.out.print("Digite o nome do aluno: ");
             String nomeAluno = sc.nextLine();
 
-            System.out.println("Data de Nascimento: ");
+            System.out.print("Data de Nascimento: ");
             String dataNascimentoAluno = sc.nextLine();
 
-            System.out.println("Cadastrando Endereço: ");
-            System.out.print("Rua: ");
-            String rua = sc.nextLine();
-            System.out.print("Bairro: ");
-            String bairro = sc.nextLine();
-            System.out.print("CEP: ");
-            String cep = sc.nextLine();
-            System.out.print("Cidade: ");
-            String cidade = sc.nextLine();
-            System.out.print("Estado: ");
-            String estado = sc.nextLine();
-            Endereco endereco = new Endereco(rua, bairro, cep, cidade, estado);
+            CadastroEndereco cadastroEndereco = new CadastroEndereco();
+            Endereco endereco = cadastroEndereco.CadastroEndereco();
 
-            System.out.println("Digite a Naturalidade: ");
+            System.out.print("Digite a Naturalidade: ");
             String naturalidade = sc.nextLine();
 
             // Escolha da turma
@@ -55,29 +46,43 @@ public class CadastroAluno {
 
             Turma turma = turmas.get(escolha);
 
-            System.out.println("Cadastrando Responsável: ");
-            System.out.print("Nome Responsável: ");
-            String nomeResp = sc.nextLine();
-            System.out.print("Data de Nascimento Responsável: ");
-            String dataResp = sc.nextLine();
-            System.out.print("Telefone: ");
-            String telefone = sc.nextLine();
-            List<Aluno> dependentes = new ArrayList<>();
+            // Cadastro do responsável
+            CadastroResponsavel cadastroResponsavel = new CadastroResponsavel();
+            Responsavel responsavel = cadastroResponsavel.CadastroResponsavel(escola, endereco);
 
-            Responsavel responsavel = new Responsavel(nomeResp, dataResp, endereco, telefone, dependentes);
+            // Verifica se já existe um responsável com o mesmo nome
+            Responsavel responsavelExistente = null;
+            if (escola.getResponsaveis() != null) {
+                for (Responsavel r : escola.getResponsaveis()) {
+                    if (r.getNome().equalsIgnoreCase(responsavel.getNome())) {
+                        responsavelExistente = r;
+                        break;
+                    }
+                }
+            }
 
-            cadastro.CadastroResponsavel(escola, nomeResp, dataResp, endereco, telefone);
+            if (responsavelExistente != null) {
+                responsavel = responsavelExistente;
+            } else {
+                if (escola.getResponsaveis() == null) {
+                    escola.setResponsaveis(new ArrayList<>());
+                }
+                escola.getResponsaveis().add(responsavel);
+            }
 
-            cadastro.CadastroAluno(escola, nomeAluno, dataNascimentoAluno, endereco, naturalidade, responsavel, turma);
+            ControleCadastroAluno controleCadastroAluno = new ControleCadastroAluno();
+            controleCadastroAluno.ControleCadastroAluno(escola, nomeAluno, dataNascimentoAluno, endereco, naturalidade, responsavel, turma);
 
-            System.out.println("Aluno cadastrado com sucesso!");
+            System.out.println("✅ Aluno cadastrado com sucesso!");
 
         } catch (InputMismatchException e) {
-            System.out.println("Erro: Entrada inválida. Certifique-se de digitar números corretamente.");
+            System.out.println("❌ Erro: Entrada inválida. Certifique-se de digitar números corretamente.");
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("Erro: " + e.getMessage());
+            System.out.println("❌ Erro: " + e.getMessage());
         } catch (Exception e) {
-            System.out.println("Ocorreu um erro inesperado: " + e.getMessage());
+            System.out.println("❌ Ocorreu um erro inesperado: " + e.getMessage());
         }
     }
 }
+
+
