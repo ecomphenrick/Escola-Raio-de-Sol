@@ -1,17 +1,13 @@
 package org.example.view;
-import org.example.controller.*;
-
 
 import org.example.model.Escola;
 
 import java.util.Scanner;
 
 public class MenuCadastro {
-    //Criando Objetos
     Scanner sc = new Scanner(System.in);
-    //Exibição do menu de cadastro com as chamadas de métodos.
     public void ExibirMenu(Escola escola) {
-        int acaoCadastro;
+        int acaoCadastro = -1;
         do {
             System.out.println("Cadastro.\n");
             System.out.println("Digite a opção desejada: ");
@@ -19,7 +15,13 @@ public class MenuCadastro {
             System.out.println("1 - Cadastrar Professor");
             System.out.println("2 - Cadastrar Turma");
             System.out.println("3 - Sair");
-            acaoCadastro = sc.nextInt();
+            try {
+                acaoCadastro = sc.nextInt();
+            } catch (Exception e) {
+                System.out.println("Entrada inválida! Digite apenas números.");
+                sc.nextLine();
+                continue;
+            }
             sc.nextLine();
             switch (acaoCadastro) {
                 case 0:
@@ -41,6 +43,9 @@ public class MenuCadastro {
                     break;
                 case 3:
                     System.out.println("Sair.");
+                    break;
+                default:
+                    System.out.println("Opção inválida, selecione outra.");
                     break;
             }
         } while (acaoCadastro != 3);

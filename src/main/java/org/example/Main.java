@@ -1,6 +1,5 @@
 package org.example;
 
-import org.example.*;
 import org.example.controller.AtualizaAno;
 import org.example.model.Escola;
 import org.example.view.MenuBusca;
@@ -18,15 +17,15 @@ public class Main {
             System.out.println("Bem vindos a Escola Raio de Sol!");
             System.out.println("0 - Cadastro");
             System.out.println("1 - Busca");
-            System.out.println("2 - Atualizar Ano"); //Ver como implementar.
+            System.out.println("2 - Atualizar Ano");
             System.out.println("3 - Sair");
 
             try {
                 acao = sc.nextInt();
             } catch (Exception e) {
                 System.out.println("Entrada inválida! Digite apenas números.");
-                sc.nextLine(); // limpa o buffer para evitar loop infinito
-                continue; // volta para o começo do loop
+                sc.nextLine();
+                continue;
             }
 
             switch (acao) {
