@@ -1,42 +1,75 @@
 package org.example.controller;
+
 import org.example.model.*;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
-//Classe para cadastro
 public class Cadastro {
-    //Método para cadastro do Aluno.
+
+    // Método para cadastro do Aluno
     public void CadastroAluno(Escola escola, String nome, String dataNascimento, Endereco endereco, String naturalidade, Responsavel responsavel, Turma turma) {
+        try {
+            if (escola.getAlunos() == null) {
+                escola.setAlunos(new ArrayList<>());
+            }
+            if (turma.getAlunos() == null) {
+                turma.setAlunos(new ArrayList<>());
+            }
 
-        Aluno aluno = new Aluno(nome, dataNascimento, endereco, naturalidade, responsavel, turma); //Criação do Aluno
+            Aluno aluno = new Aluno(nome, dataNascimento, endereco, naturalidade, responsavel, turma);
 
-        turma.getAlunos().add(aluno); //Adicionando os alunos na classe turma.
-        escola.getAlunos().add(aluno); //Adicionando os alunos na escola (realmente necesssário)
+            turma.getAlunos().add(aluno);
+            escola.getAlunos().add(aluno);
 
-        System.out.println("Aluno Cadastrado.");
-
+            System.out.println("✅ Aluno '" + nome + "' cadastrado com sucesso na turma " + turma.getSerie() + "º ano, " + turma.getAnoLetivo() + ".");
+        } catch (Exception e) {
+            System.out.println("❌ Erro ao cadastrar aluno: " + e.getMessage());
+        }
     }
 
-    //Método para criação da turma.
+    // Método para criação da turma
     public Turma CadastroTurma(Escola escola, int serie, int anoLetivo, Professor professor, List<Aluno> alunos) {
-        Turma turmaCriada = new Turma(serie, anoLetivo, professor, alunos); //Criação do novo aluno
+        try {
+            if (escola.getTurmas() == null) {
+                escola.setTurmas(new ArrayList<>());
+            }
+            if (alunos == null) {
+                alunos = new ArrayList<>();
+            }
 
-        escola.getTurmas().add(turmaCriada); //Adicionando turma na escola
-        System.out.println("Turma Cadastrada.");
+            Turma turmaCriada = new Turma(serie, anoLetivo, professor, alunos);
+            escola.getTurmas().add(turmaCriada);
 
+            System.out.println("✅ Turma do " + serie + "º ano, ano letivo " + anoLetivo + " cadastrada com sucesso.");
 
-        return turmaCriada;
+            return turmaCriada;
+        } catch (Exception e) {
+            System.out.println("❌ Erro ao cadastrar turma: " + e.getMessage());
+            return null;
+        }
     }
 
-    //Método para cadastro do professor.
-    public Professor CadastroProfessor(Escola escola, String nome, String dataNascimento, Endereco endereco, String formacao, Turma turma, String telefone, List<Aluno> dependente) {
-        Professor professor = new Professor(nome, dataNascimento, endereco, formacao, turma, telefone, dependente); //Criando Professor.
-        escola.getProfessores().add(professor); //Adicionando na Escola.
-        System.out.println("Professor cadastrado.");
+    // Método para cadastro do professor
+    public Professor CadastroProfessor(Escola escola, String nome, String dataNascimento, Endereco endereco, String formacao, Turma turma, String telefone, List<Aluno> dependentes) {
+        try {
+            if (escola.getProfessores() == null) {
+                escola.setProfessores(new ArrayList<>());
+            }
+            if (dependentes == null) {
+                dependentes = new ArrayList<>();
+            }
 
+            Professor professor = new Professor(nome, dataNascimento, endereco, formacao, turma, telefone, dependentes);
+            escola.getProfessores().add(professor);
 
-        return professor;
+            System.out.println("✅ Professor '" + nome + "' cadastrado com sucesso." + (turma != null ? " Vinculado à turma " + turma.getSerie() + "º ano." : " Sem turma vinculada."));
+
+            return professor;
+        } catch (Exception e) {
+            System.out.println("❌ Erro ao cadastrar professor: " + e.getMessage());
+            return null;
+        }
     }
 }
+
