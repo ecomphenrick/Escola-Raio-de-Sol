@@ -1,18 +1,15 @@
 package org.example.view;
 
 import org.example.controller.AtualizarAluno;
-import org.example.controller.Cadastro;
 import org.example.controller.RemoverAluno;
 import org.example.model.Aluno;
 import org.example.model.Escola;
 
 import java.util.InputMismatchException;
-import java.util.List;
 import java.util.Scanner;
 
 public class MenuBuscaAluno {
     Scanner sc = new Scanner(System.in);
-    Cadastro cadastro = new Cadastro();
 
     public void ExibirMenuAluno(Escola escola) {
         try {

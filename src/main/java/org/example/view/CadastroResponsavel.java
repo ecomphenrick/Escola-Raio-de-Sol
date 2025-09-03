@@ -1,6 +1,5 @@
 package org.example.view;
 
-import org.example.controller.Cadastro;
 import org.example.controller.ControleCadastroResponsavel;
 import org.example.model.Aluno;
 import org.example.model.Endereco;
@@ -13,7 +12,6 @@ import java.util.Scanner;
 
 public class CadastroResponsavel {
     Scanner sc =new Scanner(System.in);
-    Cadastro cadastro = new Cadastro();
     public Responsavel CadastroResponsavel(Escola escola, Endereco endereco){
         System.out.println("Cadastrando Responsável: ");
         System.out.print("Nome Responsável: ");

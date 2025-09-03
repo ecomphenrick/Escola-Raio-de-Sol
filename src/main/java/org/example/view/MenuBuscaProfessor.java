@@ -1,18 +1,15 @@
 package org.example.view;
 
 import org.example.controller.AtualizarProfessor;
-import org.example.controller.Cadastro;
 import org.example.controller.RemoverProfessor;
 import org.example.model.Escola;
 import org.example.model.Professor;
 
 import java.util.InputMismatchException;
-import java.util.List;
 import java.util.Scanner;
 
 public class MenuBuscaProfessor {
     Scanner sc = new Scanner(System.in);
-    Cadastro cadastro = new Cadastro();
 
     public void ExibirMenuProfessor(Escola escola) {
         try {

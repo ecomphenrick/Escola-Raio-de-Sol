@@ -1,6 +1,5 @@
 package org.example.view;
 
-import org.example.controller.Cadastro;
 import org.example.controller.ControleCadastroTurma;
 import org.example.model.Aluno;
 import org.example.model.Escola;
@@ -16,7 +15,6 @@ public class CadastroTurma {
 
     public void CadastroTurma(Escola escola) {
         Scanner sc = new Scanner(System.in);
-        Cadastro cadastro = new Cadastro();
 
         try {
             System.out.println("Cadastrando Turma.");

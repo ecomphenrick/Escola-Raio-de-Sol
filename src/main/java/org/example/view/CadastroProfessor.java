@@ -1,6 +1,5 @@
 package org.example.view;
 
-import org.example.controller.Cadastro;
 import org.example.controller.ControleCadastroProfessor;
 import org.example.model.*;
 
@@ -14,7 +13,6 @@ public class CadastroProfessor {
     public void CadastroProfessor(Escola escola) {
         ControleCadastroProfessor controleCadastroProfessor = new ControleCadastroProfessor();
         Scanner sc = new Scanner(System.in);
-        Cadastro cadastro = new Cadastro();
         List<Turma> turmas = escola.getTurmas();
 
         try {

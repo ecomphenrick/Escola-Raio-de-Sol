@@ -1,7 +1,6 @@
 package org.example.view;
 
 import org.example.controller.AtualizarResponsavel;
-import org.example.controller.Cadastro;
 import org.example.controller.RemoverResponsavel;
 import org.example.model.Escola;
 import org.example.model.Responsavel;
@@ -11,7 +10,6 @@ import java.util.Scanner;
 
 public class MenuBuscaResponsavel {
     Scanner sc = new Scanner(System.in);
-    Cadastro cadastro = new Cadastro();
 
     public void ExibirMenuResponsavel(Escola escola) {
         try {
