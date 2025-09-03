@@ -1,6 +1,7 @@
 package org.example.view;
 
 import org.example.controller.AtualizarAluno;
+import org.example.controller.Cadastro;
 import org.example.model.Aluno;
 import org.example.model.Escola;
 
@@ -10,10 +11,9 @@ import java.util.Scanner;
 
 public class MenuBuscaAluno {
     Scanner sc = new Scanner(System.in);
+    Cadastro cadastro = new Cadastro();
 
     public void ExibirMenuAluno(Escola escola) {
-        List<Aluno> alunos = escola.getAlunos();
-
         try {
             System.out.println("0 - Ler");
             System.out.println("1 - Atualizar");
@@ -26,13 +26,7 @@ public class MenuBuscaAluno {
             System.out.println("Digite o nome do aluno: ");
             String nome = sc.nextLine().trim();
 
-            Aluno buscado = null;
-            for (Aluno aluno : alunos) {
-                if (aluno.getNome().equalsIgnoreCase(nome)) {
-                    buscado = aluno;
-                    break;
-                }
-            }
+            Aluno buscado = buscarAlunoPorNome(escola, nome);
 
             if (buscado == null) {
                 System.out.println("❌ Não há aluno com esse nome aqui.");
@@ -41,18 +35,21 @@ public class MenuBuscaAluno {
                     case 0:
                         System.out.println("Nome: " + buscado.getNome());
                         System.out.println("Data de Nascimento: " + buscado.getDataNascimento());
-                        System.out.println("Endereço: " + buscado.getEndereco().toString());
+                        System.out.println("Endereço: " + buscado.getEndereco().bairro + " - " + buscado.getEndereco().estado );
                         System.out.println("Naturalidade: " + buscado.getNaturalidade());
                         System.out.println("Responsável: " + buscado.getResponsavel().getNome());
-                        System.out.println("Turma: " + buscado.getTurma().getSerie() + " - " + buscado.getTurma().getAnoLetivo());
+                        if (buscado.getTurma() != null) {
+                            System.out.println("Turma: " + buscado.getTurma().getSerie() + " - " + buscado.getTurma().getAnoLetivo());
+                        } else {
+                            System.out.println("Turma: Sem turma atribuída.");
+                        }
                         break;
                     case 1:
                         AtualizarAluno atualizarAluno = new AtualizarAluno();
                         atualizarAluno.AtualizarAluno(escola, buscado);
                         break;
                     case 2:
-                        alunos.remove(buscado);
-                        System.out.println("✅ Aluno removido com sucesso.");
+                        cadastro.RemoverAluno(escola, buscado);
                         break;
                     case 3:
                         System.out.println("Saindo...");
@@ -70,5 +67,15 @@ public class MenuBuscaAluno {
             System.out.println("❌ Ocorreu um erro inesperado: " + e.getMessage());
         }
     }
+
+    private Aluno buscarAlunoPorNome(Escola escola, String nome) {
+        if (escola.getAlunos() != null) {
+            for (Aluno a : escola.getAlunos()) {
+                if (a.getNome().equalsIgnoreCase(nome)) return a;
+            }
+        }
+        return null;
+    }
 }
+
 

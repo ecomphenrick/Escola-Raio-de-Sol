@@ -66,7 +66,8 @@ public class CadastroAluno {
 
             Responsavel responsavel = new Responsavel(nomeResp, dataResp, endereco, telefone, dependentes);
 
-            // Chamando o cadastro
+            cadastro.CadastroResponsavel(escola, nomeResp, dataResp, endereco, telefone);
+
             cadastro.CadastroAluno(escola, nomeAluno, dataNascimentoAluno, endereco, naturalidade, responsavel, turma);
 
             System.out.println("Aluno cadastrado com sucesso!");

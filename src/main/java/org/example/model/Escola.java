@@ -8,6 +8,7 @@ public class Escola {
     private List<Professor> professores; // Lista de Professores
     private List<Aluno> alunos; // Lista de alunos
     private List<Professor> professoresSemTurma = new ArrayList<>(); // Lista de Professores que não têm turma
+    private List<Responsavel> responsaveis;
 
     // Construtor
     public Escola() {
@@ -15,6 +16,29 @@ public class Escola {
         this.professores = new ArrayList<>();
         this.alunos = new ArrayList<>();
         this.professoresSemTurma = new ArrayList<>();
+        this.responsaveis = new ArrayList<>();
+    }
+
+    public void removerProfessor(Professor professor) {
+        if (professores.contains(professor)) {
+            professores.remove(professor);
+            System.out.println("Removido de professores com turma");
+        } else if (professoresSemTurma.contains(professor)) {
+            professoresSemTurma.remove(professor);
+            System.out.println("Removido de professores sem turma");
+        } else {
+            System.out.println("Professor não encontrado nas listas da escola");
+        }
+
+    }
+
+
+    public List<Responsavel> getResponsaveis() {
+        return responsaveis;
+    }
+
+    public void setResponsaveis(List<Responsavel> responsaveis) {
+        this.responsaveis = responsaveis;
     }
 
     // Método que adiciona o professor que está sem turma

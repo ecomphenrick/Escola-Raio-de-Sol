@@ -21,13 +21,17 @@ public class AtualizaAno {
             List<Turma> novasTurmas = new ArrayList<>();
 
             for (Turma turmaAntiga : turmas) {
-                if (turmaAntiga == null) continue; // ignora turmas nulas
+                if (turmaAntiga == null) continue;
 
                 int novaSerie = turmaAntiga.getSerie() + 1;
                 int novoAnoLetivo = turmaAntiga.getAnoLetivo() + 1;
 
                 if (novaSerie <= 5) {
+                    // Atualiza cada aluno para a nova turma
                     List<Aluno> mesmosAlunos = turmaAntiga.getAlunos() != null ? turmaAntiga.getAlunos() : new ArrayList<>();
+                    for (Aluno aluno : mesmosAlunos) {
+                        aluno.setTurma(turmaAntiga); // aponta para a turma antiga atualizada
+                    }
 
                     Turma novaTurma = new Turma(
                             novaSerie,
@@ -35,6 +39,11 @@ public class AtualizaAno {
                             turmaAntiga.getProfessor(),
                             mesmosAlunos
                     );
+
+                    // Atualiza referência da turma para cada aluno
+                    for (Aluno aluno : mesmosAlunos) {
+                        aluno.setTurma(novaTurma);
+                    }
 
                     novasTurmas.add(novaTurma);
                 } else {
@@ -50,4 +59,5 @@ public class AtualizaAno {
         }
     }
 }
+
 

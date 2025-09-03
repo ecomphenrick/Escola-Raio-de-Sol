@@ -1,6 +1,7 @@
 package org.example.view;
 
 import org.example.controller.AtualizarProfessor;
+import org.example.controller.Cadastro;
 import org.example.model.Escola;
 import org.example.model.Professor;
 
@@ -10,10 +11,9 @@ import java.util.Scanner;
 
 public class MenuBuscaProfessor {
     Scanner sc = new Scanner(System.in);
+    Cadastro cadastro = new Cadastro();
 
     public void ExibirMenuProfessor(Escola escola) {
-        List<Professor> professores = escola.getProfessoresGeral();
-
         try {
             System.out.println("0 - Ler");
             System.out.println("1 - Atualizar");
@@ -21,18 +21,12 @@ public class MenuBuscaProfessor {
             System.out.println("3 - Sair");
 
             int acao = sc.nextInt();
-            sc.nextLine(); // limpar buffer
+            sc.nextLine();
 
             System.out.println("Digite o nome do professor: ");
             String nome = sc.nextLine().trim();
 
-            Professor buscado = null;
-            for (Professor professor : professores) {
-                if (professor.getNome().equalsIgnoreCase(nome)) {
-                    buscado = professor;
-                    break;
-                }
-            }
+            Professor buscado = buscarProfessorPorNome(escola, nome);
 
             if (buscado == null) {
                 System.out.println("❌ Não há professor com esse nome.");
@@ -41,7 +35,7 @@ public class MenuBuscaProfessor {
                     case 0:
                         System.out.println("Nome: " + buscado.getNome());
                         System.out.println("Data de Nascimento: " + buscado.getDataNascimento());
-                        System.out.println("Endereço: " + buscado.getEndereco().toString());
+                        System.out.println("Endereço: " + buscado.getEndereco().bairro + " - " + buscado.getEndereco().cidade);
                         System.out.println("Formação: " + buscado.getFormacao());
                         if (buscado.getTurma() != null) {
                             System.out.println("Turma: " + buscado.getTurma().getSerie() + " - " + buscado.getTurma().getAnoLetivo());
@@ -54,8 +48,7 @@ public class MenuBuscaProfessor {
                         atualizarProfessor.AtualizarProfessor(escola, buscado);
                         break;
                     case 2:
-                        professores.remove(buscado);
-                        System.out.println("✅ Professor removido com sucesso.");
+                        cadastro.RemoverProfessor(escola, buscado);
                         break;
                     case 3:
                         System.out.println("Saindo...");
@@ -68,10 +61,21 @@ public class MenuBuscaProfessor {
 
         } catch (InputMismatchException e) {
             System.out.println("❌ Entrada inválida. Digite apenas números para a opção.");
-            sc.nextLine(); // limpar buffer
+            sc.nextLine();
         } catch (Exception e) {
             System.out.println("❌ Ocorreu um erro inesperado: " + e.getMessage());
         }
     }
+
+    private Professor buscarProfessorPorNome(Escola escola, String nome) {
+        for (Professor p : escola.getProfessores()) {
+            if (p.getNome().equalsIgnoreCase(nome)) return p;
+        }
+        for (Professor p : escola.getProfessoresSemTurma()) {
+            if (p.getNome().equalsIgnoreCase(nome)) return p;
+        }
+        return null;
+    }
 }
+
 
