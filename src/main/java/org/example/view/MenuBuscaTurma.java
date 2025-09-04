@@ -15,31 +15,36 @@ public class MenuBuscaTurma {
         List<Turma> turmas = escola.getTurmas();
 
         try {
-            System.out.println("0 - Ler");
-            System.out.println("1 - Atualizar");
-            System.out.println("2 - Deletar");
-            System.out.println("3 - Sair");
+            System.out.println("\n====================================");
+            System.out.println("            Gerenciar Turma          ");
+            System.out.println("====================================\n");
+
+            System.out.println("[0] Ler informações");
+            System.out.println("[1] Atualizar");
+            System.out.println("[2] Deletar");
+            System.out.println("[3] Voltar");
+            System.out.print("\nOpção: ");
 
             int acaoTurma = sc.nextInt();
-            sc.nextLine(); // limpar buffer
+            sc.nextLine();
 
             if (turmas == null || turmas.isEmpty()) {
-                System.out.println("❌ Não existem turmas cadastradas.");
+                System.out.println("\n❌ Não existem turmas cadastradas.");
                 return;
             }
 
-            System.out.println("Em qual turma?");
+            System.out.println("\nEscolha a turma:");
             for (int i = 0; i < turmas.size(); i++) {
                 Turma t = turmas.get(i);
                 System.out.println(i + ": " + t.getSerie() + " - " + t.getAnoLetivo());
             }
 
-            System.out.print("Escolha a turma: ");
+            System.out.print("\nOpção: ");
             int escolhaTurma = sc.nextInt();
-            sc.nextLine(); // limpar buffer
+            sc.nextLine();
 
             if (escolhaTurma < 0 || escolhaTurma >= turmas.size()) {
-                System.out.println("❌ Escolha inválida. Operação cancelada.");
+                System.out.println("\n❌ Escolha inválida. Operação cancelada.");
                 return;
             }
 
@@ -47,6 +52,7 @@ public class MenuBuscaTurma {
 
             switch (acaoTurma) {
                 case 0:
+                    System.out.println("\n--- Informações da Turma ---");
                     System.out.println("Turma: " + turmaEscolhida.getSerie() + " - " + turmaEscolhida.getAnoLetivo());
                     if (turmaEscolhida.getProfessor() != null) {
                         System.out.println("Professor: " + turmaEscolhida.getProfessor().getNome());
@@ -54,11 +60,11 @@ public class MenuBuscaTurma {
                         System.out.println("Professor: Sem professor atribuído.");
                     }
 
-                    System.out.println("Alunos: ");
+                    System.out.println("Alunos:");
                     List<Aluno> alunos = turmaEscolhida.getAlunos();
                     if (alunos != null && !alunos.isEmpty()) {
                         for (Aluno aluno : alunos) {
-                            System.out.println("Nome: " + aluno.getNome());
+                            System.out.println(" - " + aluno.getNome());
                         }
                     } else {
                         System.out.println("Nenhum aluno cadastrado nesta turma.");
@@ -66,31 +72,32 @@ public class MenuBuscaTurma {
                     break;
 
                 case 1:
-                    System.out.println("⚠ Atualização ainda não implementada.");
+                    System.out.println("\n⚠ Atualização ainda não implementada.");
                     break;
 
                 case 2:
                     turmas.remove(turmaEscolhida);
-                    System.out.println("✅ Turma removida com sucesso.");
+                    System.out.println("\n✅ Turma removida com sucesso.");
                     break;
 
                 case 3:
-                    System.out.println("Saindo...");
+                    System.out.println("\n🔙 Retornando ao menu anterior...");
                     break;
 
                 default:
-                    System.out.println("❌ Opção inválida.");
+                    System.out.println("\n⚠️ Opção inválida. Tente novamente.");
                     break;
             }
 
         } catch (InputMismatchException e) {
-            System.out.println("❌ Entrada inválida. Digite apenas números.");
-            sc.nextLine(); // limpar buffer
+            System.out.println("\n❌ Entrada inválida. Digite apenas números.");
+            sc.nextLine();
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("❌ Índice inválido. Operação cancelada.");
+            System.out.println("\n❌ Índice inválido. Operação cancelada.");
         } catch (Exception e) {
-            System.out.println("❌ Ocorreu um erro inesperado: " + e.getMessage());
+            System.out.println("\n❌ Ocorreu um erro inesperado: " + e.getMessage());
         }
     }
 }
+
 

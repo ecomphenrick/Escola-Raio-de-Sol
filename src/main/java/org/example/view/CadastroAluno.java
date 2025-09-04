@@ -15,28 +15,31 @@ public class CadastroAluno {
         List<Turma> turmas = escola.getTurmas();
 
         try {
-            System.out.println("Cadastrando Aluno.");
-            System.out.print("Digite o nome do aluno: ");
+            System.out.println("\n====================================");
+            System.out.println("           Cadastrando Aluno        ");
+            System.out.println("====================================\n");
+
+            System.out.print("Nome do aluno: ");
             String nomeAluno = sc.nextLine();
 
-            System.out.print("Data de Nascimento: ");
+            System.out.print("Data de Nascimento (dd/mm/aaaa): ");
             String dataNascimentoAluno = sc.nextLine();
 
             CadastroEndereco cadastroEndereco = new CadastroEndereco();
             Endereco endereco = cadastroEndereco.CadastroEndereco();
 
-            System.out.print("Digite a Naturalidade: ");
+            System.out.print("Naturalidade: ");
             String naturalidade = sc.nextLine();
 
-            // Escolha da turma
-            System.out.println("Qual Turma? ");
+            System.out.println("\nEscolha a Turma:");
             for (int i = 0; i < turmas.size(); i++) {
                 Turma t = turmas.get(i);
-                System.out.println(i + " - " + t.getSerie() + " - " + t.getAnoLetivo());
+                System.out.println("[" + i + "] " + t.getSerie() + " - " + t.getAnoLetivo());
             }
 
+            System.out.print("\nOpção: ");
             int escolha = sc.nextInt();
-            sc.nextLine(); // limpar buffer
+            sc.nextLine();
 
             if (escolha < 0 || escolha >= turmas.size()) {
                 throw new IndexOutOfBoundsException("Turma escolhida não existe.");
@@ -44,11 +47,9 @@ public class CadastroAluno {
 
             Turma turma = turmas.get(escolha);
 
-            // Cadastro do responsável
             CadastroResponsavel cadastroResponsavel = new CadastroResponsavel();
             Responsavel responsavel = cadastroResponsavel.CadastroResponsavel(escola, endereco);
 
-            // Verifica se já existe um responsável com o mesmo nome
             Responsavel responsavelExistente = null;
             if (escola.getResponsaveis() != null) {
                 for (Responsavel r : escola.getResponsaveis()) {
@@ -71,16 +72,17 @@ public class CadastroAluno {
             ControleCadastroAluno controleCadastroAluno = new ControleCadastroAluno();
             controleCadastroAluno.ControleCadastroAluno(escola, nomeAluno, dataNascimentoAluno, endereco, naturalidade, responsavel, turma);
 
-            System.out.println("✅ Aluno cadastrado com sucesso!");
+            System.out.println("\n✅ Aluno cadastrado com sucesso!");
 
         } catch (InputMismatchException e) {
-            System.out.println("❌ Erro: Entrada inválida. Certifique-se de digitar números corretamente.");
+            System.out.println("\n❌ Erro: Entrada inválida. Digite os números corretamente.");
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("❌ Erro: " + e.getMessage());
+            System.out.println("\n❌ Erro: " + e.getMessage());
         } catch (Exception e) {
-            System.out.println("❌ Ocorreu um erro inesperado: " + e.getMessage());
+            System.out.println("\n❌ Ocorreu um erro inesperado: " + e.getMessage());
         }
     }
 }
+
 
 

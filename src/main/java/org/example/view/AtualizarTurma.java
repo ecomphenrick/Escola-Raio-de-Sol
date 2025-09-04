@@ -1,4 +1,4 @@
-package org.example.controller;
+package org.example.view;
 
 import org.example.model.Escola;
 import org.example.model.Turma;

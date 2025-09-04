@@ -6,28 +6,37 @@ import java.util.Scanner;
 
 public class MenuCadastro {
     Scanner sc = new Scanner(System.in);
+
     public void ExibirMenu(Escola escola) {
         int acaoCadastro = -1;
+
         do {
-            System.out.println("Cadastro.\n");
-            System.out.println("Digite a opção desejada: ");
-            System.out.println("0 - Cadastrar Aluno");
-            System.out.println("1 - Cadastrar Professor");
-            System.out.println("2 - Cadastrar Turma");
-            System.out.println("3 - Sair");
+            System.out.println("\n====================================");
+            System.out.println("             Cadastro               ");
+            System.out.println("====================================\n");
+
+            System.out.println("Escolha uma ação:");
+            System.out.println("[0] Cadastrar Aluno");
+            System.out.println("[1] Cadastrar Professor");
+            System.out.println("[2] Cadastrar Turma");
+            System.out.println("[3] Voltar ao menu principal");
+            System.out.print("\nOpção: ");
+
             try {
                 acaoCadastro = sc.nextInt();
             } catch (Exception e) {
-                System.out.println("Entrada inválida! Digite apenas números.");
+                System.out.println("\n❌ Entrada inválida! Digite apenas números.");
                 sc.nextLine();
                 continue;
             }
+
             sc.nextLine();
+            System.out.println();
+
             switch (acaoCadastro) {
                 case 0:
-
-                    if (escola.getTurmas() == null || escola.getTurmas().isEmpty()) { //Verifica se existem turmas cadastradas.
-                        System.out.println("Não há turmas cadastradas, cadastre uma antes.");
+                    if (escola.getTurmas() == null || escola.getTurmas().isEmpty()) {
+                        System.out.println("⚠️ Não há turmas cadastradas. Cadastre uma antes.");
                     } else {
                         CadastroAluno cadastroAluno = new CadastroAluno();
                         cadastroAluno.CadastroAluno(escola);
@@ -42,12 +51,13 @@ public class MenuCadastro {
                     cadastroTurma.CadastroTurma(escola);
                     break;
                 case 3:
-                    System.out.println("Sair.");
+                    System.out.println("🔙 Retornando ao menu principal...");
                     break;
                 default:
-                    System.out.println("Opção inválida, selecione outra.");
+                    System.out.println("⚠️ Opção inválida. Tente novamente.");
                     break;
             }
+
         } while (acaoCadastro != 3);
     }
 }

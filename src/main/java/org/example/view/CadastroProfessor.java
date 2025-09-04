@@ -16,11 +16,14 @@ public class CadastroProfessor {
         List<Turma> turmas = escola.getTurmas();
 
         try {
-            System.out.println("Cadastrando Professor.");
+            System.out.println("\n====================================");
+            System.out.println("         Cadastrando Professor       ");
+            System.out.println("====================================\n");
+
             System.out.print("Nome: ");
             String nome = sc.nextLine();
 
-            System.out.print("Data de Nascimento: ");
+            System.out.print("Data de Nascimento (dd/mm/aaaa): ");
             String dataNascimento = sc.nextLine();
 
             CadastroEndereco cadastroEndereco = new CadastroEndereco();
@@ -32,32 +35,32 @@ public class CadastroProfessor {
             System.out.print("Telefone: ");
             String telefone = sc.nextLine();
 
-            List<Aluno> dependentes = new ArrayList<>();
             Professor novoProfessor;
 
             if (turmas == null || turmas.isEmpty()) {
                 novoProfessor = controleCadastroProfessor.CadastroProfessor(escola, nome, dataNascimento, endereco,
                         formacao, null, telefone);
             } else {
-                System.out.println("Qual Turma? ");
+                System.out.println("\nEscolha a Turma:");
                 for (int i = 0; i < turmas.size(); i++) {
                     Turma t = turmas.get(i);
                     String status = (t.getProfessor() == null) ? " [Sem professor]" : " [Já possui professor]";
-                    System.out.println(i + " - " + t.getSerie() + " - " + t.getAnoLetivo() + status);
+                    System.out.println("[" + i + "] " + t.getSerie() + " - " + t.getAnoLetivo() + status);
                 }
 
+                System.out.print("\nOpção: ");
                 int escolha = sc.nextInt();
                 sc.nextLine();
 
                 if (escolha < 0 || escolha >= turmas.size()) {
-                    System.out.println("❌ Escolha de turma inválida. Professor será cadastrado sem turma.");
+                    System.out.println("\n⚠️ Escolha de turma inválida. Professor cadastrado sem turma.");
                     novoProfessor = controleCadastroProfessor.CadastroProfessor(escola, nome, dataNascimento, endereco,
                             formacao, null, telefone);
                 } else {
                     Turma turma = turmas.get(escolha);
 
                     if (turma.getProfessor() != null) {
-                        System.out.println("❌ Esta turma já possui professor: " + turma.getProfessor().getNome());
+                        System.out.println("\n⚠️ Esta turma já possui professor: " + turma.getProfessor().getNome());
                         System.out.println("Professor cadastrado sem turma.");
                         novoProfessor = controleCadastroProfessor.CadastroProfessor(escola, nome, dataNascimento, endereco,
                                 formacao, null, telefone);
@@ -65,17 +68,18 @@ public class CadastroProfessor {
                         novoProfessor = controleCadastroProfessor.CadastroProfessor(escola, nome, dataNascimento, endereco,
                                 formacao, turma, telefone);
                         turma.setProfessor(novoProfessor);
-                        System.out.println("✅ Professor vinculado à turma.");
+                        System.out.println("\n✅ Professor vinculado à turma com sucesso!");
                     }
                 }
             }
 
         } catch (InputMismatchException e) {
-            System.out.println("❌ Erro: Entrada inválida. Digite apenas números ao escolher a turma.");
+            System.out.println("\n❌ Erro: Entrada inválida. Digite apenas números ao escolher a turma.");
         } catch (Exception e) {
-            System.out.println("❌ Ocorreu um erro inesperado: " + e.getMessage());
+            System.out.println("\n❌ Ocorreu um erro inesperado: " + e.getMessage());
         }
     }
 }
+
 
 

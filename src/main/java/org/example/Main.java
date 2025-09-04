@@ -14,19 +14,26 @@ public class Main {
         int acao = -1;
 
         do {
-            System.out.println("Bem vindos a Escola Raio de Sol!");
-            System.out.println("0 - Cadastro");
-            System.out.println("1 - Busca");
-            System.out.println("2 - Atualizar Ano");
-            System.out.println("3 - Sair");
+            System.out.println("\n====================================");
+            System.out.println("     Bem-vindo à Escola Raio de Sol!");
+            System.out.println("====================================\n");
+
+            System.out.println("Escolha uma opção:");
+            System.out.println("[0] - Cadastro");
+            System.out.println("[1] - Busca");
+            System.out.println("[2] - Atualizar Ano");
+            System.out.println("[3] - Sair");
+            System.out.print("\nDigite sua escolha: ");
 
             try {
                 acao = sc.nextInt();
             } catch (Exception e) {
-                System.out.println("Entrada inválida! Digite apenas números.");
+                System.out.println("\n❌ Entrada inválida! Digite apenas números.");
                 sc.nextLine();
                 continue;
             }
+
+            System.out.println();
 
             switch (acao) {
                 case 0:
@@ -42,14 +49,15 @@ public class Main {
                     atualizaAno.atualizarAno(escola);
                     break;
                 case 3:
-                    System.out.println("Saindo...");
+                    System.out.println("👋 Obrigado por usar o sistema! Até logo!");
                     break;
                 default:
-                    System.out.println("Opção Inválida, selecione outra!");
+                    System.out.println("⚠️ Opção inválida, selecione outra!");
                     break;
             }
 
         } while (acao != 3);
     }
 }
+
 

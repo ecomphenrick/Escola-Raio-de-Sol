@@ -1,6 +1,5 @@
 package org.example.view;
 
-import org.example.controller.AtualizarResponsavel;
 import org.example.controller.RemoverResponsavel;
 import org.example.model.Escola;
 import org.example.model.Responsavel;
@@ -13,25 +12,30 @@ public class MenuBuscaResponsavel {
 
     public void ExibirMenuResponsavel(Escola escola) {
         try {
-            System.out.println("0 - Ler");
-            System.out.println("1 - Atualizar");
-            System.out.println("2 - Deletar");
-            System.out.println("3 - Sair");
+            System.out.println("\n====================================");
+            System.out.println("        Gerenciar Responsável        ");
+            System.out.println("====================================\n");
+
+            System.out.println("[0] Ler informações");
+            System.out.println("[1] Atualizar");
+            System.out.println("[2] Deletar");
+            System.out.println("[3] Voltar");
+            System.out.print("\nOpção: ");
 
             int acao = sc.nextInt();
-            sc.nextLine(); // limpar buffer
+            sc.nextLine();
 
-            System.out.println("Digite o nome do responsável: ");
+            System.out.print("\nDigite o nome do responsável: ");
             String nome = sc.nextLine().trim();
 
             Responsavel buscado = buscarResponsavelPorNome(escola, nome);
 
             if (buscado == null) {
-                System.out.println("❌ Não há responsável com esse nome.");
+                System.out.println("\n❌ Não há responsável com esse nome cadastrado.");
             } else {
                 switch (acao) {
                     case 0:
-                        // Ler informações
+                        System.out.println("\n--- Informações do Responsável ---");
                         System.out.println("Nome: " + buscado.getNome());
                         System.out.println("Data de Nascimento: " + buscado.getDataNascimento());
                         System.out.println("Telefone: " + buscado.getTelefone());
@@ -44,22 +48,22 @@ public class MenuBuscaResponsavel {
                     case 2:
                         RemoverResponsavel removerResponsavel = new RemoverResponsavel();
                         removerResponsavel.RemoverResponsavel(escola, buscado);
-                        System.out.println("✅ Responsável removido e desvinculado dos alunos.");
+                        System.out.println("\n✅ Responsável removido e desvinculado dos alunos.");
                         break;
                     case 3:
-                        System.out.println("Saindo...");
+                        System.out.println("\n🔙 Retornando ao menu anterior...");
                         break;
                     default:
-                        System.out.println("❌ Opção inválida.");
+                        System.out.println("\n⚠️ Opção inválida. Tente novamente.");
                         break;
                 }
             }
 
         } catch (InputMismatchException e) {
-            System.out.println("❌ Entrada inválida. Digite apenas números para a opção.");
-            sc.nextLine(); // limpar buffer
+            System.out.println("\n❌ Entrada inválida. Digite apenas números para a opção.");
+            sc.nextLine();
         } catch (Exception e) {
-            System.out.println("❌ Ocorreu um erro inesperado: " + e.getMessage());
+            System.out.println("\n❌ Ocorreu um erro inesperado: " + e.getMessage());
         }
     }
 
@@ -72,5 +76,6 @@ public class MenuBuscaResponsavel {
         return null;
     }
 }
+
 
 

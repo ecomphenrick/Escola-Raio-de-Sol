@@ -1,24 +1,26 @@
-package org.example.controller;
+package org.example.view;
 
-import org.example.model.*;
+import org.example.model.Endereco;
+import org.example.model.Escola;
+import org.example.model.Professor;
+import org.example.model.Turma;
 
-import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
-public class AtualizarAluno {
+public class AtualizarProfessor {
     Scanner sc = new Scanner(System.in);
 
-    public void AtualizarAluno(Escola escola, Aluno aluno) {
+    public void AtualizarProfessor(Escola escola, Professor professor) {
         try {
             System.out.println("O que você deseja editar: ");
             System.out.println("0 - Nome");
             System.out.println("1 - Data de Nascimento");
             System.out.println("2 - Endereço");
-            System.out.println("3 - Naturalidade");
-            System.out.println("4 - Responsável");
-            System.out.println("5 - Turma");
+            System.out.println("3 - Formação");
+            System.out.println("4 - Turma");
+            System.out.println("5 - Telefone");
             System.out.println("Outra tecla para sair... ");
 
             int acao = sc.nextInt();
@@ -26,16 +28,16 @@ public class AtualizarAluno {
 
             switch (acao) {
                 case 0:
-                    System.out.print("Digite o novo nome: ");
+                    System.out.print("Corrija o nome: ");
                     String novoNome = sc.nextLine();
-                    aluno.setNome(novoNome);
+                    professor.setNome(novoNome);
                     System.out.println("✅ Nome atualizado com sucesso.");
                     break;
 
                 case 1:
-                    System.out.print("Digite a nova data de nascimento: ");
+                    System.out.print("Corrija a data de nascimento: ");
                     String novaData = sc.nextLine();
-                    aluno.setDataNascimento(novaData);
+                    professor.setDataNascimento(novaData);
                     System.out.println("✅ Data de nascimento atualizada com sucesso.");
                     break;
 
@@ -52,36 +54,21 @@ public class AtualizarAluno {
                     System.out.print("Estado: ");
                     String estado = sc.nextLine();
                     Endereco endereco = new Endereco(rua, bairro, cep, cidade, estado);
-                    aluno.setEndereco(endereco);
+                    professor.setEndereco(endereco);
                     System.out.println("✅ Endereço atualizado com sucesso.");
                     break;
 
                 case 3:
-                    System.out.print("Digite a nova naturalidade: ");
-                    String novaNaturalidade = sc.nextLine();
-                    aluno.setNaturalidade(novaNaturalidade);
-                    System.out.println("✅ Naturalidade atualizada com sucesso.");
+                    System.out.print("Corrija a formação: ");
+                    String novaFormacao = sc.nextLine();
+                    professor.setFormacao(novaFormacao);
+                    System.out.println("✅ Formação atualizada com sucesso.");
                     break;
 
                 case 4:
-                    System.out.println("Corrija o responsável: ");
-                    System.out.print("Nome Responsável: ");
-                    String nomeResp = sc.nextLine();
-                    System.out.print("Data de Nascimento Responsável: ");
-                    String dataResp = sc.nextLine();
-                    System.out.print("Telefone: ");
-                    String telefone = sc.nextLine();
-                    List<Aluno> dependentes = new ArrayList<>();
-                    Responsavel responsavel = new Responsavel(nomeResp, dataResp, aluno.getEndereco(), telefone, dependentes);
-                    aluno.setResponsavel(responsavel);
-                    System.out.println("✅ Responsável atualizado com sucesso.");
-                    break;
-
-                case 5:
                     System.out.println("Corrija a turma: ");
-                    // Remove aluno da turma atual, se houver
-                    if (aluno.getTurma() != null) {
-                        aluno.getTurma().getAlunos().remove(aluno);
+                    if (professor.getTurma() != null) {
+                        professor.getTurma().setProfessor(null);
                     }
 
                     List<Turma> turmas = escola.getTurmas();
@@ -90,17 +77,24 @@ public class AtualizarAluno {
                     }
 
                     System.out.print("Escolha a nova turma: ");
-                    int novaTurmaIndice = sc.nextInt();
+                    int turmaIndice = sc.nextInt();
                     sc.nextLine(); // limpar buffer
 
-                    if (novaTurmaIndice < 0 || novaTurmaIndice >= turmas.size()) {
+                    if (turmaIndice < 0 || turmaIndice >= turmas.size()) {
                         System.out.println("❌ Índice inválido. Turma não alterada.");
                     } else {
-                        Turma novaTurma = turmas.get(novaTurmaIndice);
-                        novaTurma.getAlunos().add(aluno);
-                        aluno.setTurma(novaTurma);
+                        Turma novaTurma = turmas.get(turmaIndice);
+                        novaTurma.setProfessor(professor);
+                        professor.setTurma(novaTurma);
                         System.out.println("✅ Turma atualizada com sucesso.");
                     }
+                    break;
+
+                case 5:
+                    System.out.print("Corrija o telefone: ");
+                    String novoTelefone = sc.nextLine();
+                    professor.setTelefone(novoTelefone);
+                    System.out.println("✅ Telefone atualizado com sucesso.");
                     break;
 
                 default:
@@ -111,8 +105,11 @@ public class AtualizarAluno {
         } catch (InputMismatchException e) {
             System.out.println("❌ Entrada inválida. Digite apenas números para a opção.");
             sc.nextLine(); // limpar buffer
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("❌ Índice de turma inválido. Operação cancelada.");
         } catch (Exception e) {
             System.out.println("❌ Ocorreu um erro inesperado: " + e.getMessage());
         }
     }
 }
+

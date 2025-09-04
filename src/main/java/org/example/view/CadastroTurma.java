@@ -17,42 +17,45 @@ public class CadastroTurma {
         Scanner sc = new Scanner(System.in);
 
         try {
-            System.out.println("Cadastrando Turma.");
-            System.out.println("Digite a série: [1 ao 5]");
+            System.out.println("\n====================================");
+            System.out.println("            Cadastrando Turma        ");
+            System.out.println("====================================\n");
 
+            System.out.print("Digite a série [1 a 5]: ");
             int serie = sc.nextInt();
-            sc.nextLine(); // limpar buffer
+            sc.nextLine();
 
             if (serie < 1 || serie > 5) {
-                System.out.println("A escola não suporta essa série...");
-                return; // sai do método, pois a série é inválida
+                System.out.println("\n⚠️ A escola não suporta essa série...");
+                return;
             }
 
-            System.out.println("Digite o ano letivo: ");
+            System.out.print("Digite o ano letivo: ");
             int anoLetivo = sc.nextInt();
-            sc.nextLine(); // limpar buffer
+            sc.nextLine();
 
             Professor professorTurma = null;
-
             List<Professor> disponiveis = escola.getProfessoresSemTurma();
+
             if (!disponiveis.isEmpty()) {
-                System.out.println("Professores disponíveis:");
+                System.out.println("\nProfessores disponíveis:");
                 for (int i = 0; i < disponiveis.size(); i++) {
-                    System.out.println(i + " - " + disponiveis.get(i).getNome());
+                    System.out.println("[" + i + "] " + disponiveis.get(i).getNome());
                 }
 
+                System.out.print("\nEscolha um professor: ");
                 int escolhaProf = sc.nextInt();
-                sc.nextLine(); // limpar buffer
+                sc.nextLine();
 
                 if (escolhaProf < 0 || escolhaProf >= disponiveis.size()) {
-                    System.out.println("Escolha de professor inválida. Nenhum professor será atribuído.");
+                    System.out.println("\n⚠️ Escolha de professor inválida. Nenhum professor será atribuído.");
                 } else {
                     professorTurma = disponiveis.get(escolhaProf);
                     escola.getProfessoresSemTurma().remove(professorTurma);
                 }
 
             } else {
-                System.out.println("Nenhum professor disponível.");
+                System.out.println("\n⚠️ Nenhum professor disponível.");
             }
 
             List<Aluno> alunos = new ArrayList<>();
@@ -62,14 +65,16 @@ public class CadastroTurma {
             if (professorTurma != null) {
                 professorTurma.setTurma(novaTurma);
                 novaTurma.setProfessor(professorTurma);
+                System.out.println("\n✅ Professor vinculado à turma.");
             }
 
-            System.out.println("Turma cadastrada com sucesso!");
+            System.out.println("\n✅ Turma cadastrada com sucesso!");
 
         } catch (InputMismatchException e) {
-            System.out.println("Erro: Entrada inválida. Digite apenas números.");
+            System.out.println("\n❌ Erro: Entrada inválida. Digite apenas números.");
         } catch (Exception e) {
-            System.out.println("Ocorreu um erro inesperado: " + e.getMessage());
+            System.out.println("\n❌ Ocorreu um erro inesperado: " + e.getMessage());
         }
     }
 }
+

@@ -1,6 +1,7 @@
 package org.example.controller;
 
 import org.example.model.*;
+import org.example.view.AtualizarAluno;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
