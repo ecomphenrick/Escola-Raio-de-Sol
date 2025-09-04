@@ -4,7 +4,7 @@ import org.example.model.Aluno;
 import org.example.model.Escola;
 import org.example.model.Turma;
 
-import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class AtualizaAno {
@@ -18,36 +18,46 @@ public class AtualizaAno {
                 return;
             }
 
-            List<Turma> novasTurmas = new ArrayList<>();
+            Iterator<Turma> iterator = turmas.iterator();
 
-            for (Turma turmaAntiga : turmas) {
-                if (turmaAntiga == null) continue;
+            while (iterator.hasNext()) {
+                Turma turma = iterator.next();
+                if (turma == null) continue;
 
-                int novaSerie = turmaAntiga.getSerie() + 1;
-                int novoAnoLetivo = turmaAntiga.getAnoLetivo() + 1;
+                int novaSerie = turma.getSerie() + 1;
+                int novoAnoLetivo = turma.getAnoLetivo() + 1;
 
                 if (novaSerie <= 5) {
-                    List<Aluno> mesmosAlunos = turmaAntiga.getAlunos() != null ? turmaAntiga.getAlunos() : new ArrayList<>();
+                    turma.setSerie(novaSerie);
+                    turma.setAnoLetivo(novoAnoLetivo);
+                    System.out.println("✅ Turma atualizada para " + novaSerie + "º ano - " + novoAnoLetivo);
 
-                    Turma novaTurma = new Turma(
-                            novaSerie,
-                            novoAnoLetivo,
-                            turmaAntiga.getProfessor(),
-                            mesmosAlunos
-                    );
-
-                    for (Aluno aluno : mesmosAlunos) {
-                        aluno.setTurma(novaTurma);
+                    // Atualiza cada aluno para continuar vinculado à mesma turma
+                    if (turma.getAlunos() != null) {
+                        for (Aluno aluno : turma.getAlunos()) {
+                            aluno.setTurma(turma);
+                        }
                     }
 
-                    novasTurmas.add(novaTurma);
-                    System.out.println("✅ Turma " + turmaAntiga.getSerie() + "º ano atualizada para " + novaSerie + "º ano.");
                 } else {
-                    System.out.println("🎓 Turma do 5º ano " + turmaAntiga.getAnoLetivo() + " se formou!");
+                    System.out.println("🎓 Turma do 5º ano " + turma.getAnoLetivo() + " se formou e será removida.");
+                    // Remove a turma da lista
+                    iterator.remove();
+
+                    // Desvincula os alunos da turma (se necessário)
+                    if (turma.getAlunos() != null) {
+                        for (Aluno aluno : turma.getAlunos()) {
+                            aluno.setTurma(null);
+                        }
+                    }
+
+                    // Desvincula professor da turma
+                    if (turma.getProfessor() != null) {
+                        turma.getProfessor().setTurma(null);
+                    }
                 }
             }
 
-            turmas.addAll(novasTurmas);
             System.out.println("\n✅ Atualização de turmas concluída com sucesso.");
 
         } catch (Exception e) {
@@ -55,6 +65,7 @@ public class AtualizaAno {
         }
     }
 }
+
 
 
 

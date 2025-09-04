@@ -45,7 +45,7 @@ public class CadastroProfessor {
                 for (int i = 0; i < turmas.size(); i++) {
                     Turma t = turmas.get(i);
                     String status = (t.getProfessor() == null) ? " [Sem professor]" : " [Já possui professor]";
-                    System.out.println("[" + i + "] " + t.getSerie() + " - " + t.getAnoLetivo() + status);
+                    System.out.println("[" + i + "] " + t.getSerie() + "º " + t.getAnoLetivo() + status);
                 }
 
                 System.out.print("\nOpção: ");
