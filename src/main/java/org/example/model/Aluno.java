@@ -1,14 +1,21 @@
 package org.example.model;
 
 import java.util.List;
-//Criação de Classe Aluno
 
-public class Aluno extends org.example.model.Pessoa {
+/**
+ * Representa um aluno da escola.
+ * <p>
+ * A classe Aluno estende a classe {@link Pessoa} e inclui informações adicionais
+ * como naturalidade, responsável e turma.
+ * </p>
+ *
+ * @author Henrick
+ * @version 1.0
+ */
+public class Aluno extends Pessoa {
     private String naturalidade;
-    private org.example.model.Responsavel responsavel;
-    private org.example.model.Turma turma;
-
-    // Construtor da classe Aluno (Ver como implementar a atualização das turmas e os boletins.)
+    private Responsavel responsavel;
+    private Turma turma;
     public Aluno(String nome, String dataNascimento, Endereco endereco, String naturalidade, Responsavel responsavel, Turma turma) {
         super(nome, dataNascimento, endereco);
         this.naturalidade = naturalidade;
@@ -16,7 +23,7 @@ public class Aluno extends org.example.model.Pessoa {
         this.turma = turma;
     }
 
-    //Getters e Setters dos atributos
+
     public String getNaturalidade() {
         return naturalidade;
     }

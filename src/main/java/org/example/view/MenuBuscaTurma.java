@@ -8,9 +8,32 @@ import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Classe responsável por exibir o menu de gerenciamento de turmas.
+ * <p>
+ * Permite ao usuário ler informações de uma turma, atualizar dados (não implementado ainda)
+ * ou deletar a turma da escola. A turma é escolhida a partir de uma lista numerada.
+ * </p>
+ *
+ * Autor: Henrick
+ * Versão: 1.0
+ */
 public class MenuBuscaTurma {
     Scanner sc = new Scanner(System.in);
 
+    /**
+     * Exibe o menu de gerenciamento de turmas.
+     * <p>
+     * As opções disponíveis são:
+     * <ul>
+     *     <li>0 - Ler informações da turma</li>
+     *     <li>1 - Atualizar turma (ainda não implementado)</li>
+     *     <li>2 - Deletar turma</li>
+     *     <li>3 - Voltar ao menu anterior</li>
+     * </ul>
+     *
+     * @param escola Escola cujas turmas serão gerenciadas
+     */
     public void ExibirMenuTurma(Escola escola) {
         List<Turma> turmas = escola.getTurmas();
 
@@ -72,7 +95,8 @@ public class MenuBuscaTurma {
                     break;
 
                 case 1:
-                    System.out.println("\n⚠ Atualização ainda não implementada.");
+                    AtualizarTurma atualizarTurma = new AtualizarTurma();
+                    atualizarTurma.AtualizaTurma(escola, turmaEscolhida);
                     break;
 
                 case 2:
@@ -99,5 +123,6 @@ public class MenuBuscaTurma {
         }
     }
 }
+
 
 

@@ -1,0 +1,112 @@
+@startuml
+' ==== MODELS ====
+class Pessoa {
+    - nome: String
+    - dataNascimento: String
+}
+
+class Aluno {
+    - endereco: Endereco
+    - responsavel: Responsavel
+    - naturalidade: String
+}
+
+class Professor {
+    - formacao: String
+    - disciplina: String
+}
+
+class Responsavel {
+    - telefone: String
+}
+
+class Endereco {
+    - rua: String
+    - numero: String
+    - cidade: String
+    - estado: String
+    - cep: String
+}
+
+class Turma {
+    - nome: String
+    - alunos: List<Aluno>
+    - professor: Professor
+}
+
+class Escola {
+    - alunos: List<Aluno>
+    - professores: List<Professor>
+    - turmas: List<Turma>
+    - responsaveis: List<Responsavel>
+}
+
+Pessoa <|-- Aluno
+Pessoa <|-- Professor
+
+Aluno --> Responsavel
+Aluno --> Endereco
+Turma --> Aluno
+Turma --> Professor
+Escola --> Aluno
+Escola --> Professor
+Escola --> Turma
+Escola --> Responsavel
+
+' ==== CONTROLLERS ====
+class AtualizaAno
+class ControleCadastroAluno
+class ControleCadastroProfessor
+class ControleCadastroResponsavel
+class ControleCadastroTurma
+class RemoverAluno
+class RemoverProfessor
+class RemoverResponsavel
+
+' ==== VIEWS ====
+class AtualizarAluno
+class AtualizarProfessor
+class AtualizarResponsavel
+class AtualizarTurma
+class CadastroAluno
+class CadastroEndereco
+class CadastroProfessor
+class CadastroResponsavel
+class CadastroTurma
+class MenuBusca
+class MenuBuscaAluno
+class MenuBuscaProfessor
+class MenuBuscaResponsavel
+class MenuBuscaTurma
+class MenuCadastro
+class Main
+
+' Conexões possíveis (MVC simplificado)
+ControleCadastroAluno --> Aluno
+ControleCadastroProfessor --> Professor
+ControleCadastroResponsavel --> Responsavel
+ControleCadastroTurma --> Turma
+RemoverAluno --> Aluno
+RemoverProfessor --> Professor
+RemoverResponsavel --> Responsavel
+AtualizaAno --> Escola
+
+AtualizarAluno --> ControleCadastroAluno
+AtualizarProfessor --> ControleCadastroProfessor
+AtualizarResponsavel --> ControleCadastroResponsavel
+AtualizarTurma --> ControleCadastroTurma
+CadastroAluno --> ControleCadastroAluno
+CadastroProfessor --> ControleCadastroProfessor
+CadastroResponsavel --> ControleCadastroResponsavel
+CadastroTurma --> ControleCadastroTurma
+MenuBuscaAluno --> Aluno
+MenuBuscaProfessor --> Professor
+MenuBuscaResponsavel --> Responsavel
+MenuBuscaTurma --> Turma
+MenuCadastro --> Aluno
+MenuCadastro --> Professor
+MenuCadastro --> Responsavel
+MenuCadastro --> Turma
+
+@enduml
+

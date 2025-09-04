@@ -7,9 +7,32 @@ import org.example.model.Escola;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+/**
+ * Classe responsável por exibir o menu de gerenciamento de alunos.
+ * <p>
+ * Permite ao usuário ler informações de um aluno, atualizar seus dados ou deletá-lo.
+ * O aluno é buscado pelo nome.
+ * </p>
+ *
+ * Autor: Henrick
+ * Versão: 1.0
+ */
 public class MenuBuscaAluno {
     Scanner sc = new Scanner(System.in);
 
+    /**
+     * Exibe o menu de gerenciamento de alunos.
+     * <p>
+     * As opções disponíveis são:
+     * <ul>
+     *     <li>0 - Ler informações do aluno</li>
+     *     <li>1 - Atualizar dados do aluno</li>
+     *     <li>2 - Deletar aluno</li>
+     *     <li>3 - Voltar ao menu anterior</li>
+     * </ul>
+     *
+     * @param escola Escola cujos alunos serão gerenciados
+     */
     public void ExibirMenuAluno(Escola escola) {
         try {
             System.out.println("\n====================================");
@@ -76,6 +99,13 @@ public class MenuBuscaAluno {
         }
     }
 
+    /**
+     * Busca um aluno pelo nome na lista de alunos da escola.
+     *
+     * @param escola Escola cujos alunos serão pesquisados
+     * @param nome Nome do aluno a ser buscado
+     * @return O objeto Aluno correspondente ao nome, ou null se não encontrado
+     */
     private Aluno buscarAlunoPorNome(Escola escola, String nome) {
         if (escola.getAlunos() != null) {
             for (Aluno a : escola.getAlunos()) {
@@ -85,6 +115,7 @@ public class MenuBuscaAluno {
         return null;
     }
 }
+
 
 
 

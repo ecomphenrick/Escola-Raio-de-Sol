@@ -7,9 +7,32 @@ import org.example.model.Responsavel;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+/**
+ * Classe responsável por exibir o menu de gerenciamento de responsáveis.
+ * <p>
+ * Permite ao usuário ler informações de um responsável, atualizar seus dados ou deletá-lo.
+ * O responsável é buscado pelo nome.
+ * </p>
+ *
+ * Autor: Henrick
+ * Versão: 1.0
+ */
 public class MenuBuscaResponsavel {
     Scanner sc = new Scanner(System.in);
 
+    /**
+     * Exibe o menu de gerenciamento de responsáveis.
+     * <p>
+     * As opções disponíveis são:
+     * <ul>
+     *     <li>0 - Ler informações do responsável</li>
+     *     <li>1 - Atualizar dados do responsável</li>
+     *     <li>2 - Deletar responsável</li>
+     *     <li>3 - Voltar ao menu anterior</li>
+     * </ul>
+     *
+     * @param escola Escola cujos responsáveis serão gerenciados
+     */
     public void ExibirMenuResponsavel(Escola escola) {
         try {
             System.out.println("\n====================================");
@@ -67,6 +90,13 @@ public class MenuBuscaResponsavel {
         }
     }
 
+    /**
+     * Busca um responsável pelo nome na lista de responsáveis da escola.
+     *
+     * @param escola Escola cujos responsáveis serão pesquisados
+     * @param nome Nome do responsável a ser buscado
+     * @return O objeto Responsavel correspondente ao nome, ou null se não encontrado
+     */
     private Responsavel buscarResponsavelPorNome(Escola escola, String nome) {
         if (escola.getResponsaveis() != null) {
             for (Responsavel r : escola.getResponsaveis()) {
@@ -76,6 +106,7 @@ public class MenuBuscaResponsavel {
         return null;
     }
 }
+
 
 
 

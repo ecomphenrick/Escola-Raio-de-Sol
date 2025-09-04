@@ -7,9 +7,34 @@ import org.example.model.Endereco;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+/**
+ * Classe responsável por atualizar os dados de um responsável na escola.
+ * <p>
+ * Permite editar informações como nome, data de nascimento, endereço e telefone do responsável.
+ * </p>
+ *
+ * @author Henrick
+ * @version 1.0
+ */
 public class AtualizarResponsavel {
     Scanner sc = new Scanner(System.in);
 
+    /**
+     * Atualiza os dados de um responsável específico da escola.
+     * <p>
+     * O usuário escolhe qual campo deseja alterar através de um menu interativo:
+     * <ul>
+     *     <li>0 - Nome</li>
+     *     <li>1 - Data de Nascimento</li>
+     *     <li>2 - Endereço</li>
+     *     <li>3 - Telefone</li>
+     * </ul>
+     * Caso a opção escolhida seja inválida, o método encerra a edição.
+     * </p>
+     *
+     * @param escola Escola em que o responsável está vinculado
+     * @param responsavel Responsável cujos dados serão atualizados
+     */
     public void AtualizarResponsavel(Escola escola, Responsavel responsavel) {
         try {
             System.out.println("O que você deseja editar: ");
@@ -20,7 +45,7 @@ public class AtualizarResponsavel {
             System.out.println("Outra tecla para sair...");
 
             int acao = sc.nextInt();
-            sc.nextLine(); // limpar buffer
+            sc.nextLine();
 
             switch (acao) {
                 case 0:
@@ -68,10 +93,11 @@ public class AtualizarResponsavel {
 
         } catch (InputMismatchException e) {
             System.out.println("❌ Entrada inválida. Digite apenas números para a opção.");
-            sc.nextLine(); // limpar buffer
+            sc.nextLine();
         } catch (Exception e) {
             System.out.println("❌ Ocorreu um erro inesperado: " + e.getMessage());
         }
     }
 }
+
 

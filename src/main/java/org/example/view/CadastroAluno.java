@@ -8,8 +8,30 @@ import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Classe responsável pelo cadastro interativo de alunos na escola.
+ * <p>
+ * Permite cadastrar um aluno informando: nome, data de nascimento, endereço,
+ * naturalidade, responsável e turma. O responsável é verificado para não duplicar
+ * registros na escola. A turma é escolhida a partir da lista de turmas existentes.
+ * </p>
+ *
+ * @author Henrick
+ * @version 1.0
+ */
 public class CadastroAluno {
 
+    /**
+     * Executa o cadastro interativo de um aluno.
+     * <p>
+     * O método solicita ao usuário informações do aluno e cria o objeto correspondente.
+     * Também verifica se o responsável já existe na escola para evitar duplicidade.
+     * Caso a turma escolhida seja inválida ou ocorra algum erro na entrada, mensagens
+     * de erro apropriadas são exibidas.
+     * </p>
+     *
+     * @param escola Escola na qual o aluno será cadastrado
+     */
     public void CadastroAluno(Escola escola) {
         Scanner sc = new Scanner(System.in);
         List<Turma> turmas = escola.getTurmas();
@@ -83,6 +105,7 @@ public class CadastroAluno {
         }
     }
 }
+
 
 
 

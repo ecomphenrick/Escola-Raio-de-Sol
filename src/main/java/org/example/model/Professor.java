@@ -1,14 +1,22 @@
 package org.example.model;
 
-import java.util.List;
-
+/**
+ * Representa um professor da escola.
+ * <p>
+ * A classe Professor estende {@link Pessoa} e adiciona informações específicas
+ * como formação, telefone e turma atribuída.
+ * </p>
+ *
+ * @author Henrick
+ * @version 1.0
+ */
 public class Professor extends Pessoa {
+
     private String formacao;
     private String telefone;
     private Turma turma;
 
-    // Construtor da classe, (Ver como atualizar turma e como colocar os dependentes)
-    public Professor(String nome, String dataNascimento, Endereco endereco, String formacao, Turma turma, String telefone){
+    public Professor(String nome, String dataNascimento, Endereco endereco, String formacao, Turma turma, String telefone) {
         super(nome, dataNascimento, endereco);
         this.formacao = formacao;
         this.turma = turma;

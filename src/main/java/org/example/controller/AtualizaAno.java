@@ -7,8 +7,29 @@ import org.example.model.Turma;
 import java.util.Iterator;
 import java.util.List;
 
+/**
+ * Classe responsável por atualizar o ano letivo das turmas da escola.
+ * <p>
+ * O método {@link #atualizarAno(Escola)} incrementa a série e o ano letivo de cada turma.
+ * Turmas que atingirem o 5º ano são consideradas formadas e removidas da escola.
+ * Além disso, o vínculo dos alunos e professores é atualizado conforme a mudança.
+ * </p>
+ *
+ * @author Henrick
+ * @version 1.0
+ */
 public class AtualizaAno {
 
+    /**
+     * Atualiza todas as turmas de uma escola para o próximo ano letivo.
+     * <p>
+     * - Incrementa série e ano letivo para turmas existentes.
+     * - Remove turmas do 5º ano e desvincula alunos e professores.
+     * - Mantém os alunos vinculados às turmas que continuam.
+     * </p>
+     *
+     * @param escola Escola cujas turmas serão atualizadas
+     */
     public void atualizarAno(Escola escola) {
         try {
             List<Turma> turmas = escola.getTurmas();
@@ -32,7 +53,6 @@ public class AtualizaAno {
                     turma.setAnoLetivo(novoAnoLetivo);
                     System.out.println("✅ Turma atualizada para " + novaSerie + "º ano - " + novoAnoLetivo);
 
-                    // Atualiza cada aluno para continuar vinculado à mesma turma
                     if (turma.getAlunos() != null) {
                         for (Aluno aluno : turma.getAlunos()) {
                             aluno.setTurma(turma);
@@ -41,17 +61,14 @@ public class AtualizaAno {
 
                 } else {
                     System.out.println("🎓 Turma do 5º ano " + turma.getAnoLetivo() + " se formou e será removida.");
-                    // Remove a turma da lista
                     iterator.remove();
 
-                    // Desvincula os alunos da turma (se necessário)
                     if (turma.getAlunos() != null) {
                         for (Aluno aluno : turma.getAlunos()) {
                             aluno.setTurma(null);
                         }
                     }
 
-                    // Desvincula professor da turma
                     if (turma.getProfessor() != null) {
                         turma.getProfessor().setTurma(null);
                     }
@@ -65,6 +82,7 @@ public class AtualizaAno {
         }
     }
 }
+
 
 
 

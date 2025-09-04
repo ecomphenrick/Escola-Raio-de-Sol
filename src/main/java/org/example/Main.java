@@ -7,7 +7,31 @@ import org.example.view.MenuCadastro;
 
 import java.util.Scanner;
 
+/**
+ * Classe principal do sistema Escola Raio de Sol.
+ * <p>
+ * Fornece um menu principal com as opções de:
+ * <ul>
+ *     <li>Cadastro de Alunos, Professores e Turmas</li>
+ *     <li>Busca e gerenciamento de registros</li>
+ *     <li>Atualização do ano das turmas</li>
+ *     <li>Sair do sistema</li>
+ * </ul>
+ * </p>
+ *
+ * Autor: Henrick
+ * Versão: 1.0
+ */
 public class Main {
+
+    /**
+     * Ponto de entrada da aplicação.
+     * <p>
+     * Inicializa a escola, exibe o menu principal e gerencia a interação do usuário.
+     * </p>
+     *
+     * @param args argumentos de linha de comando (não utilizados)
+     */
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         Escola escola = new Escola();
@@ -59,5 +83,6 @@ public class Main {
         } while (acao != 3);
     }
 }
+
 
 

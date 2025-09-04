@@ -9,9 +9,37 @@ import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Classe responsável por atualizar os dados de um professor na escola.
+ * <p>
+ * Permite editar informações como nome, data de nascimento, endereço, formação,
+ * turma e telefone do professor.
+ * </p>
+ *
+ * @author Henrick
+ * @version 1.0
+ */
 public class AtualizarProfessor {
     Scanner sc = new Scanner(System.in);
 
+    /**
+     * Atualiza os dados de um professor específico da escola.
+     * <p>
+     * O usuário escolhe qual campo deseja alterar através de um menu interativo:
+     * <ul>
+     *     <li>0 - Nome</li>
+     *     <li>1 - Data de Nascimento</li>
+     *     <li>2 - Endereço</li>
+     *     <li>3 - Formação</li>
+     *     <li>4 - Turma</li>
+     *     <li>5 - Telefone</li>
+     * </ul>
+     * Caso a opção escolhida seja inválida, o método encerra a edição.
+     * </p>
+     *
+     * @param escola Escola em que o professor está vinculado
+     * @param professor Professor cujos dados serão atualizados
+     */
     public void AtualizarProfessor(Escola escola, Professor professor) {
         try {
             System.out.println("O que você deseja editar: ");
@@ -24,7 +52,7 @@ public class AtualizarProfessor {
             System.out.println("Outra tecla para sair... ");
 
             int acao = sc.nextInt();
-            sc.nextLine(); // limpar buffer
+            sc.nextLine();
 
             switch (acao) {
                 case 0:
@@ -78,7 +106,7 @@ public class AtualizarProfessor {
 
                     System.out.print("Escolha a nova turma: ");
                     int turmaIndice = sc.nextInt();
-                    sc.nextLine(); // limpar buffer
+                    sc.nextLine();
 
                     if (turmaIndice < 0 || turmaIndice >= turmas.size()) {
                         System.out.println("❌ Índice inválido. Turma não alterada.");
@@ -104,7 +132,7 @@ public class AtualizarProfessor {
 
         } catch (InputMismatchException e) {
             System.out.println("❌ Entrada inválida. Digite apenas números para a opção.");
-            sc.nextLine(); // limpar buffer
+            sc.nextLine();
         } catch (IndexOutOfBoundsException e) {
             System.out.println("❌ Índice de turma inválido. Operação cancelada.");
         } catch (Exception e) {
@@ -112,4 +140,7 @@ public class AtualizarProfessor {
         }
     }
 }
+
+
+
 

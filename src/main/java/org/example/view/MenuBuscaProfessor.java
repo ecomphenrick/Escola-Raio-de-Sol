@@ -7,9 +7,32 @@ import org.example.model.Professor;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+/**
+ * Classe responsável por exibir o menu de gerenciamento de professores.
+ * <p>
+ * Permite ao usuário ler informações de um professor, atualizar seus dados ou deletá-lo.
+ * O professor é buscado pelo nome.
+ * </p>
+ *
+ * Autor: Henrick
+ * Versão: 1.0
+ */
 public class MenuBuscaProfessor {
     Scanner sc = new Scanner(System.in);
 
+    /**
+     * Exibe o menu de gerenciamento de professores.
+     * <p>
+     * As opções disponíveis são:
+     * <ul>
+     *     <li>0 - Ler informações do professor</li>
+     *     <li>1 - Atualizar dados do professor</li>
+     *     <li>2 - Deletar professor</li>
+     *     <li>3 - Voltar ao menu anterior</li>
+     * </ul>
+     *
+     * @param escola Escola cujos professores serão gerenciados
+     */
     public void ExibirMenuProfessor(Escola escola) {
         try {
             System.out.println("\n====================================");
@@ -71,6 +94,13 @@ public class MenuBuscaProfessor {
         }
     }
 
+    /**
+     * Busca um professor pelo nome nas listas de professores da escola.
+     *
+     * @param escola Escola cujos professores serão pesquisados
+     * @param nome Nome do professor a ser buscado
+     * @return O objeto Professor correspondente ao nome, ou null se não encontrado
+     */
     private Professor buscarProfessorPorNome(Escola escola, String nome) {
         if (escola.getProfessores() != null) {
             for (Professor p : escola.getProfessores()) {
@@ -85,5 +115,6 @@ public class MenuBuscaProfessor {
         return null;
     }
 }
+
 
 

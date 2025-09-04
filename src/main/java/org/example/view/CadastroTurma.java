@@ -11,8 +11,34 @@ import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Classe responsável pelo cadastro interativo de turmas na escola.
+ * <p>
+ * Permite ao usuário informar série, ano letivo e vincular um professor disponível.
+ * Uma lista vazia de alunos é criada automaticamente.
+ * A turma é registrada na escola através do {@link ControleCadastroTurma}.
+ * </p>
+ *
+ * @author Henrick
+ * @version 1.0
+ */
 public class CadastroTurma {
 
+    /**
+     * Executa o cadastro interativo de uma nova turma.
+     * <p>
+     * O método solicita ao usuário:
+     * <ul>
+     *     <li>Série da turma (1 a 5)</li>
+     *     <li>Ano letivo</li>
+     *     <li>Escolha de professor disponível</li>
+     * </ul>
+     * Caso nenhum professor seja escolhido ou disponível, a turma será criada sem professor.
+     * A turma é adicionada à escola e o professor, se selecionado, é vinculado à turma.
+     * </p>
+     *
+     * @param escola Escola na qual a turma será cadastrada
+     */
     public void CadastroTurma(Escola escola) {
         Scanner sc = new Scanner(System.in);
 
@@ -77,4 +103,5 @@ public class CadastroTurma {
         }
     }
 }
+
 

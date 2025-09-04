@@ -7,9 +7,37 @@ import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Classe responsável por atualizar os dados de um aluno na escola.
+ * <p>
+ * Permite editar informações como nome, data de nascimento, endereço, naturalidade,
+ * responsável e turma do aluno.
+ * </p>
+ *
+ * @author Henrick
+ * @version 1.0
+ */
 public class AtualizarAluno {
     Scanner sc = new Scanner(System.in);
 
+    /**
+     * Atualiza os dados de um aluno específico da escola.
+     * <p>
+     * O usuário escolhe qual campo deseja alterar através de um menu interativo:
+     * <ul>
+     *     <li>0 - Nome</li>
+     *     <li>1 - Data de Nascimento</li>
+     *     <li>2 - Endereço</li>
+     *     <li>3 - Naturalidade</li>
+     *     <li>4 - Responsável</li>
+     *     <li>5 - Turma</li>
+     * </ul>
+     * Caso a opção escolhida seja inválida, o método encerra a edição.
+     * </p>
+     *
+     * @param escola Escola em que o aluno está matriculado
+     * @param aluno Aluno cujos dados serão atualizados
+     */
     public void AtualizarAluno(Escola escola, Aluno aluno) {
         try {
             System.out.println("O que você deseja editar: ");
@@ -22,7 +50,7 @@ public class AtualizarAluno {
             System.out.println("Outra tecla para sair... ");
 
             int acao = sc.nextInt();
-            sc.nextLine(); // limpar buffer
+            sc.nextLine();
 
             switch (acao) {
                 case 0:
@@ -79,7 +107,6 @@ public class AtualizarAluno {
 
                 case 5:
                     System.out.println("Corrija a turma: ");
-                    // Remove aluno da turma atual, se houver
                     if (aluno.getTurma() != null) {
                         aluno.getTurma().getAlunos().remove(aluno);
                     }
@@ -91,7 +118,7 @@ public class AtualizarAluno {
 
                     System.out.print("Escolha a nova turma: ");
                     int novaTurmaIndice = sc.nextInt();
-                    sc.nextLine(); // limpar buffer
+                    sc.nextLine();
 
                     if (novaTurmaIndice < 0 || novaTurmaIndice >= turmas.size()) {
                         System.out.println("❌ Índice inválido. Turma não alterada.");
@@ -110,9 +137,10 @@ public class AtualizarAluno {
 
         } catch (InputMismatchException e) {
             System.out.println("❌ Entrada inválida. Digite apenas números para a opção.");
-            sc.nextLine(); // limpar buffer
+            sc.nextLine();
         } catch (Exception e) {
             System.out.println("❌ Ocorreu um erro inesperado: " + e.getMessage());
         }
     }
 }
+

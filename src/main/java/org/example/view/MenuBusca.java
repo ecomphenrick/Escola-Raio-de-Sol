@@ -5,9 +5,34 @@ import org.example.model.Escola;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+/**
+ * Classe responsável por exibir o menu de buscas no sistema da escola.
+ * <p>
+ * Permite ao usuário buscar informações sobre Alunos, Professores, Turmas e Responsáveis.
+ * Redireciona para menus específicos de cada tipo de cadastro.
+ * </p>
+ *
+ * Autor: Henrick
+ * Versão: 1.0
+ */
 public class MenuBusca {
     Scanner sc = new Scanner(System.in);
 
+    /**
+     * Exibe o menu de busca principal e processa a opção do usuário.
+     * <p>
+     * As opções disponíveis são:
+     * <ul>
+     *     <li>0 - Aluno</li>
+     *     <li>1 - Professor</li>
+     *     <li>2 - Turma</li>
+     *     <li>3 - Responsável</li>
+     *     <li>4 - Voltar ao menu principal</li>
+     * </ul>
+     * O método valida entradas inválidas e trata exceções de entrada.
+     *
+     * @param escola Escola cujos dados serão buscados
+     */
     public void ExibirMenu(Escola escola) {
         int acao = -1;
 
@@ -83,3 +108,4 @@ public class MenuBusca {
         } while (acao != 4);
     }
 }
+

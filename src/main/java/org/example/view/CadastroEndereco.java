@@ -4,9 +4,28 @@ import org.example.model.Endereco;
 
 import java.util.Scanner;
 
+/**
+ * Classe responsável pelo cadastro interativo de endereços.
+ * <p>
+ * Permite ao usuário informar rua, bairro, CEP, cidade e estado,
+ * retornando um objeto {@link Endereco} com os dados fornecidos.
+ * </p>
+ *
+ * @author Henrick
+ * @version 1.0
+ */
 public class CadastroEndereco {
     Scanner sc = new Scanner(System.in);
 
+    /**
+     * Executa o cadastro interativo de um endereço.
+     * <p>
+     * Solicita ao usuário informações sobre rua, bairro, CEP, cidade e estado,
+     * cria um objeto {@link Endereco} e retorna-o.
+     * </p>
+     *
+     * @return objeto {@link Endereco} preenchido com os dados informados pelo usuário
+     */
     public Endereco CadastroEndereco() {
         System.out.println("\n====================================");
         System.out.println("          Cadastrando Endereço       ");
@@ -34,4 +53,5 @@ public class CadastroEndereco {
         return endereco;
     }
 }
+
 

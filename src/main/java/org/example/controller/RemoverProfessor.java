@@ -4,9 +4,28 @@ import org.example.model.Escola;
 import org.example.model.Professor;
 import org.example.model.Turma;
 
+/**
+ * Classe responsável por remover professores da escola e, se houver, das turmas a que estão vinculados.
+ * <p>
+ * Trata professores que estão vinculados a uma turma e aqueles sem turma, removendo-os da lista correspondente.
+ * </p>
+ *
+ * @author Henrick
+ * @version 1.0
+ */
 public class RemoverProfessor {
 
-    // Remove professor da escola e, se houver, da turma
+    /**
+     * Remove um professor específico da escola.
+     * <p>
+     * - Se o professor estiver vinculado a uma turma, remove a referência da turma.
+     * - Remove o professor da lista de professores com turma ou da lista de professores sem turma.
+     * - Caso o professor não seja encontrado em nenhuma lista, exibe mensagem informativa.
+     * </p>
+     *
+     * @param escola Escola da qual o professor será removido
+     * @param professor Professor a ser removido
+     */
     public void RemoverProfessor(Escola escola, Professor professor) {
         if (professor == null || escola == null) {
             System.out.println("❌ Escola ou professor inválido.");
@@ -42,3 +61,4 @@ public class RemoverProfessor {
         }
     }
 }
+

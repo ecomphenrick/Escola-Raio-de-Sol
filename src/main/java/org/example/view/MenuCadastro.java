@@ -1,12 +1,34 @@
 package org.example.view;
 
 import org.example.model.Escola;
-
 import java.util.Scanner;
 
+/**
+ * Classe responsável por exibir o menu de cadastro na aplicação.
+ * <p>
+ * Permite ao usuário cadastrar Alunos, Professores e Turmas.
+ * Cada opção redireciona para a classe de cadastro correspondente.
+ * </p>
+ *
+ * Autor: Henrick
+ * Versão: 1.0
+ */
 public class MenuCadastro {
     Scanner sc = new Scanner(System.in);
 
+    /**
+     * Exibe o menu de cadastro e permite a escolha das ações.
+     * <p>
+     * As opções disponíveis são:
+     * <ul>
+     *     <li>0 - Cadastrar Aluno (é necessário que haja turmas cadastradas)</li>
+     *     <li>1 - Cadastrar Professor</li>
+     *     <li>2 - Cadastrar Turma</li>
+     *     <li>3 - Voltar ao menu principal</li>
+     * </ul>
+     *
+     * @param escola Escola onde os cadastros serão realizados
+     */
     public void ExibirMenu(Escola escola) {
         int acaoCadastro = -1;
 
@@ -61,5 +83,6 @@ public class MenuCadastro {
         } while (acaoCadastro != 3);
     }
 }
+
 
 
