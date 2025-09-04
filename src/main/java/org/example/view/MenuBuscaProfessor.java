@@ -102,18 +102,14 @@ public class MenuBuscaProfessor {
      * @return O objeto Professor correspondente ao nome, ou null se não encontrado
      */
     private Professor buscarProfessorPorNome(Escola escola, String nome) {
-        if (escola.getProfessores() != null) {
-            for (Professor p : escola.getProfessores()) {
-                if (p.getNome().equalsIgnoreCase(nome)) return p;
-            }
-        }
-        if (escola.getProfessoresSemTurma() != null) {
-            for (Professor p : escola.getProfessoresSemTurma()) {
-                if (p.getNome().equalsIgnoreCase(nome)) return p;
+        for (Professor p : escola.getProfessoresGeral()) {
+            if (p.getNome().trim().equalsIgnoreCase(nome.trim())) {
+                return p;
             }
         }
         return null;
     }
+
 }
 
 
