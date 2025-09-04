@@ -14,7 +14,7 @@ public class AtualizaAno {
             List<Turma> turmas = escola.getTurmas();
 
             if (turmas == null || turmas.isEmpty()) {
-                System.out.println("❌ Não há turmas cadastradas para atualizar.");
+                System.out.println("\n❌ Não há turmas cadastradas para atualizar.");
                 return;
             }
 
@@ -27,11 +27,7 @@ public class AtualizaAno {
                 int novoAnoLetivo = turmaAntiga.getAnoLetivo() + 1;
 
                 if (novaSerie <= 5) {
-                    // Atualiza cada aluno para a nova turma
                     List<Aluno> mesmosAlunos = turmaAntiga.getAlunos() != null ? turmaAntiga.getAlunos() : new ArrayList<>();
-                    for (Aluno aluno : mesmosAlunos) {
-                        aluno.setTurma(turmaAntiga); // aponta para a turma antiga atualizada
-                    }
 
                     Turma novaTurma = new Turma(
                             novaSerie,
@@ -40,24 +36,25 @@ public class AtualizaAno {
                             mesmosAlunos
                     );
 
-                    // Atualiza referência da turma para cada aluno
                     for (Aluno aluno : mesmosAlunos) {
                         aluno.setTurma(novaTurma);
                     }
 
                     novasTurmas.add(novaTurma);
+                    System.out.println("✅ Turma " + turmaAntiga.getSerie() + "º ano atualizada para " + novaSerie + "º ano.");
                 } else {
-                    System.out.println("✅ Turma do 5º ano " + turmaAntiga.getAnoLetivo() + " se formou!");
+                    System.out.println("🎓 Turma do 5º ano " + turmaAntiga.getAnoLetivo() + " se formou!");
                 }
             }
 
             turmas.addAll(novasTurmas);
-            System.out.println("✅ Atualização de turmas concluída com sucesso.");
+            System.out.println("\n✅ Atualização de turmas concluída com sucesso.");
 
         } catch (Exception e) {
-            System.out.println("❌ Ocorreu um erro ao atualizar as turmas: " + e.getMessage());
+            System.out.println("\n❌ Ocorreu um erro ao atualizar as turmas: " + e.getMessage());
         }
     }
 }
+
 
 
