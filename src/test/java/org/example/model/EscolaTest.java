@@ -26,8 +26,8 @@ class EscolaTest {
         escola = new Escola();
         endereco = new Endereco("A", "Feira VI", "44034-236", "Feira de Santana", "Bahia");
 
-        professor1 = new Professor("Jhon", "21/02/1984", endereco, "História",turma, "75992658825", null);
-        professor2 = new Professor("Ana", "21/02/1987", endereco, "Geografia", turma, "2637412367", null);
+        professor1 = new Professor("Jhon", "21/02/1984", endereco, "História",turma, "75992658825");
+        professor2 = new Professor("Ana", "21/02/1987", endereco, "Geografia", turma, "2637412367");
         responsavel = new Responsavel("Kaique", "23/04/2032", endereco, "888888382183", null);
         aluno1 = new Aluno("João", "15/09/2017", endereco, "Brasileiro", responsavel, turma);
         aluno2 = new Aluno("Pedro", "20/03/2016", endereco, "Brasileiro", responsavel, turma);

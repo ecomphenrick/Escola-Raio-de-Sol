@@ -7,15 +7,12 @@ import java.util.List;
 
 public class ControleCadastroProfessor {
     public Professor CadastroProfessor(Escola escola, String nome, String dataNascimento, Endereco endereco,
-                                       String formacao, Turma turma, String telefone, List<Aluno> dependentes) {
+                                       String formacao, Turma turma, String telefone) {
         if (escola.getProfessores() == null) {
             escola.setProfessores(new ArrayList<>());
         }
-        if (dependentes == null) {
-            dependentes = new ArrayList<>();
-        }
 
-        Professor professor = new Professor(nome, dataNascimento, endereco, formacao, turma, telefone, dependentes);
+        Professor professor = new Professor(nome, dataNascimento, endereco, formacao, turma, telefone);
 
         if (turma == null) {
             // sem turma, adiciona na lista de professores sem turma

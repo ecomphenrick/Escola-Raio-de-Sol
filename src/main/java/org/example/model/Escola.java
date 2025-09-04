@@ -19,20 +19,6 @@ public class Escola {
         this.responsaveis = new ArrayList<>();
     }
 
-    public void removerProfessor(Professor professor) {
-        if (professores.contains(professor)) {
-            professores.remove(professor);
-            System.out.println("Removido de professores com turma");
-        } else if (professoresSemTurma.contains(professor)) {
-            professoresSemTurma.remove(professor);
-            System.out.println("Removido de professores sem turma");
-        } else {
-            System.out.println("Professor não encontrado nas listas da escola");
-        }
-
-    }
-
-
     public List<Responsavel> getResponsaveis() {
         return responsaveis;
     }

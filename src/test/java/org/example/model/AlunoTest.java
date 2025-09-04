@@ -17,7 +17,7 @@ class AlunoTest {
     void setUp() {
         responsavel = new Responsavel("Carlos", "20/10/93", endereco, "75992737232",null);
         endereco = new Endereco("A", "Feira VI", "44034-236", "Feira de Santana", "Bahia");
-        professor = new Professor("Jhon", "21/02/1984", endereco, "História",turma, "75992658825", null);
+        professor = new Professor("Jhon", "21/02/1984", endereco, "História",turma, "75992658825");
         turma = new Turma(8, 2024, professor, null);
         aluno = new Aluno("João", "14/04/2002", endereco, "Brasileiro", responsavel, turma);
     }

@@ -14,13 +14,8 @@ class ProfessorTest {
     void setUp() {
         endereco = new Endereco("A", "Feira VI", "44034-236", "Feira de Santana", "Bahia");
         turma = new Turma(8, 2024, null, null);
-        professor = new Professor("Jhon", "21/02/1984", endereco, "História", turma, "75992658825", null);
+        professor = new Professor("Jhon", "21/02/1984", endereco, "História", turma, "75992658825");
         turma.setProfessor(professor); // vincula professor à turma
-    }
-
-    @Test
-    void getDependente() {
-        assertNull(professor.getDependente());
     }
 
 

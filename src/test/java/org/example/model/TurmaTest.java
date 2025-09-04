@@ -19,7 +19,7 @@ class TurmaTest {
     void setUp() {
         endereco = new Endereco("A", "Feira VI", "44034-236", "Feira de Santana", "Bahia");
 
-        professor = new Professor("Carlos", "10/05/1980", endereco, "Matemática", null, "75991112233", null);
+        professor = new Professor("Carlos", "10/05/1980", endereco, "Matemática", null, "75991112233");
 
         aluno1 = new Aluno("João", "15/09/2017", endereco, "Brasileiro", null, null);
         aluno2 = new Aluno("Pedro", "20/03/2016", endereco, "Brasileiro", null, null);
@@ -53,7 +53,7 @@ class TurmaTest {
 
     @Test
     void setProfessor() {
-        Professor novoProfessor = new Professor("Ana", "12/11/1985", endereco, "Português", null, "75992223344", null);
+        Professor novoProfessor = new Professor("Ana", "12/11/1985", endereco, "Português", null, "75992223344");
         turma.setProfessor(novoProfessor);
         assertEquals(novoProfessor, turma.getProfessor());
     }

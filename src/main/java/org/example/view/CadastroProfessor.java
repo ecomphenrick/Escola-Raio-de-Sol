@@ -37,7 +37,7 @@ public class CadastroProfessor {
 
             if (turmas == null || turmas.isEmpty()) {
                 novoProfessor = controleCadastroProfessor.CadastroProfessor(escola, nome, dataNascimento, endereco,
-                        formacao, null, telefone, dependentes);
+                        formacao, null, telefone);
             } else {
                 System.out.println("Qual Turma? ");
                 for (int i = 0; i < turmas.size(); i++) {
@@ -52,7 +52,7 @@ public class CadastroProfessor {
                 if (escolha < 0 || escolha >= turmas.size()) {
                     System.out.println("❌ Escolha de turma inválida. Professor será cadastrado sem turma.");
                     novoProfessor = controleCadastroProfessor.CadastroProfessor(escola, nome, dataNascimento, endereco,
-                            formacao, null, telefone, dependentes);
+                            formacao, null, telefone);
                 } else {
                     Turma turma = turmas.get(escolha);
 
@@ -60,10 +60,10 @@ public class CadastroProfessor {
                         System.out.println("❌ Esta turma já possui professor: " + turma.getProfessor().getNome());
                         System.out.println("Professor cadastrado sem turma.");
                         novoProfessor = controleCadastroProfessor.CadastroProfessor(escola, nome, dataNascimento, endereco,
-                                formacao, null, telefone, dependentes);
+                                formacao, null, telefone);
                     } else {
                         novoProfessor = controleCadastroProfessor.CadastroProfessor(escola, nome, dataNascimento, endereco,
-                                formacao, turma, telefone, dependentes);
+                                formacao, turma, telefone);
                         turma.setProfessor(novoProfessor);
                         System.out.println("✅ Professor vinculado à turma.");
                     }
